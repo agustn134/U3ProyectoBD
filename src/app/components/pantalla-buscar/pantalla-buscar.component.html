@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buscar Empleado</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="search-container">
+    <h2>Buscar Empleado</h2>
+
+    <!-- Barra de Búsqueda -->
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Buscar por Clave, RFC o Apellido">
+      <button type="button" id="searchButton">Buscar</button>
+    </div>
+
+    <!-- Resultados de Búsqueda -->
+    <div class="search-results">
+      <table id="resultsTable">
+        <thead>
+          <tr>
+            <th>Clave</th>
+            <th>Nombre</th>
+            <th>Departamento</th>
+            <th>Puesto</th>
+            <th>Fecha de Alta</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Los resultados se llenarán dinámicamente con JavaScript -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Modal de Detalles del Empleado -->
+  <div id="employeeModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3>Detalles del Empleado</h3>
+      <div id="employeeDetails">
+        <!-- Los detalles se llenarán dinámicamente con JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
