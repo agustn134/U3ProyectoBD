@@ -9,6 +9,9 @@ import { CursosEmpleadoComponent } from './components/cursos-empleado/cursos-emp
 import { DocumentosExternosComponent } from './components/documentos-externos/documentos-externos.component';
 import { GenerarClavesComponent } from './components/generar-claves/generar-claves.component';
 import { PantallaDeCursosComponent } from './components/pantalla-de-cursos/pantalla-de-cursos.component';
+import { RegistrarEmpleadoComponent } from './components/registrar-empleado/registrar-empleado.component';
+import { RhNavegacionComponent } from './components/rh-navegacion/rh-navegacion.component';
+import { BuscarEmpleadoComponent } from './components/buscar-empleado/buscar-empleado.component';
 
 
 export const routes: Routes = [
@@ -23,6 +26,10 @@ export const routes: Routes = [
   { path: 'empleado/inicio', component: InicioEmpleadoComponent },
   { path: 'rh/pantalla-buscar', component: PantallaBuscarComponent },
   { path: 'empleado/buscar-curso', component: PantallaDeCursosComponent },
+  { path: 'rh/registrar-empleado', component: RegistrarEmpleadoComponent },
+  { path: 'rh/buscar-empleado', component: BuscarEmpleadoComponent },
+  { path: 'rh', component: RhNavegacionComponent },
 
-  { path: '**', redirectTo: '/' } // Redirección a la página principal si la ruta no existe
+
+  { path: '**', redirectTo: 'home' } // Redirección a la página principal si la ruta no existe
 ];
