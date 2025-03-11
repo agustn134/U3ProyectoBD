@@ -1,26 +1,28 @@
-<div class="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
-  <div class="relative py-3 sm:max-w-xl sm:mx-auto">
-    <div class="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
-      <div class="max-w-md mx-auto">
-        <div class="divide-y divide-gray-200">
-          <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
-            <h2 class="text-3xl font-bold text-center mb-8">Bienvenido al sistema</h2>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Recursos Humanos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="min-h-screen flex items-center justify-center">
+        <div class="w-full max-w-4xl p-10 bg-white rounded-xl shadow-lg">
+            <h1 class="text-4xl font-bold text-center text-gray-800 mb-8">Bienvenido al Sistema</h1>
+            <p class="text-lg text-center text-gray-600 mb-6">Seleccione su rol para continuar</p>
 
-            <div class="flex flex-col space-y-4">
-              <a [routerLink]="['/empleado', 'actividades-empleado']"
-                 class="bg-blue-500 text-white px-6 py-3 rounded-lg text-center hover:bg-blue-600 transition-colors">
-                Empleado
-              </a>
-              <a [routerLink]="['/rh', 'buscar-empleado']"
-                 class="bg-green-500 text-white px-6 py-3 rounded-lg text-center hover:bg-green-600 transition-colors">
-                Recursos Humanos
-              </a>
+            <div class="grid grid-cols-2 gap-6">
+                <a href="/empleado/actualizar-datos-empleado"
+                   class="p-6 bg-gray-500 text-white text-xl font-semibold rounded-lg text-center shadow-lg hover:bg-blue-600 transition-all">
+                    Empleado
+                </a>
+                <a href="/rh/buscar-empleado"
+                   class="p-6 bg-gray-500 text-white text-xl font-semibold rounded-lg text-center shadow-lg hover:bg-blue-600 transition-all">
+                    Recursos Humanos
+                </a>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-</div>
-
-
+</body>
+</html>

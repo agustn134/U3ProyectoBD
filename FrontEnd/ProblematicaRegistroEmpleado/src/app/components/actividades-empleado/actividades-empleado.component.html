@@ -1,32 +1,31 @@
-<div class="container">
-    <h1>Mis Actividades</h1>
+<div class="flex min-h-screen">
+  <!-- Barra de navegación -->
+  <app-empleado-navegacion class="w-64 flex-shrink-0"></app-empleado-navegacion>
+  <div class="flex-1 p-6 bg-gray-50">
 
-    <!-- Tabla de Actividades -->
-    <table id="actividadesTable">
-      <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Fecha de Inicio</th>
-          <th>Fecha de Término</th>
-          <th>Estatus</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Filas de actividades se llenarán con JavaScript -->
-      </tbody>
-    </table>
-
-    <!-- Modal para Detalles de la Actividad -->
-    <div id="modal" class="modal">
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Detalles de la Actividad</h2>
-        <p><strong>Nombre:</strong> <span id="modalNombre"></span></p>
-        <p><strong>Fecha de Inicio:</strong> <span id="modalFechaInicio"></span></p>
-        <p><strong>Fecha de Término:</strong> <span id="modalFechaTermino"></span></p>
-        <p><strong>Estatus:</strong> <span id="modalEstatus"></span></p>
-        <p><strong>Cursos Asociados:</strong> <span id="modalCursos"></span></p>
-      </div>
+  <!-- Lista de Actividades -->
+    <div class="overflow-x-auto">
+      <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Ver Actividades</h2>
+      <table class="w-full text-sm text-left text-gray-500">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+          <tr>
+            <th scope="col" class="px-6 py-3">Nombre de la Actividad</th>
+            <th scope="col" class="px-6 py-3">Estatus</th>
+            <th scope="col" class="px-6 py-3">Fecha de Inicio</th>
+            <th scope="col" class="px-6 py-3">Fecha de Término</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let actividad of actividades; let i = index" class="bg-white border-b hover:bg-gray-50">
+            <td class="px-6 py-4">{{ actividad.nombre }}</td>
+            <td class="px-6 py-4">{{ actividad.estatus }}</td>
+            <td class="px-6 py-4">{{ actividad.fechaInicio }}</td>
+            <td class="px-6 py-4">{{ actividad.fechaTermino }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+
   </div>
+
+</div>

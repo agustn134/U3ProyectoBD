@@ -1,100 +1,183 @@
-<div class="container">
-    <h1>Actualizar Datos Personales</h1>
-    <form id="formActualizarDatos">
-      <!-- Sección de Información Básica -->
-      <div class="form-section">
-        <h2>Información Básica</h2>
-        <div class="form-group">
-          <label for="nombre">Nombre:</label>
-          <input type="text" id="nombre" name="nombre" required>
-        </div>
-        <div class="form-group">
-          <label for="apellidoPaterno">Apellido Paterno:</label>
-          <input type="text" id="apellidoPaterno" name="apellidoPaterno" required>
-        </div>
-        <div class="form-group">
-          <label for="apellidoMaterno">Apellido Materno:</label>
-          <input type="text" id="apellidoMaterno" name="apellidoMaterno" required>
-        </div>
-        <div class="form-group">
-          <label for="rfc">RFC:</label>
-          <input type="text" id="rfc" name="rfc" readonly>
-        </div>
-        <div class="form-group">
-          <label for="fechaNacimiento">Fecha de Nacimiento:</label>
-          <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
-        </div>
-        <div class="form-group">
-          <label for="sexo">Sexo:</label>
-          <select id="sexo" name="sexo" required>
-            <option value="Masculino">Masculino</option>
-            <option value="Femenino">Femenino</option>
-            <option value="Otro">Otro</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="foto">Foto:</label>
-          <input type="file" id="foto" name="foto" accept="image/*">
-        </div>
-      </div>
+<div class="flex min-h-screen">
+  <!-- Barra de navegación -->
+  <app-empleado-navegacion class="w-64 flex-shrink-0"></app-empleado-navegacion>
 
-      <!-- Sección de Domicilio -->
-      <div class="form-section">
-        <h2>Domicilio</h2>
+  <!-- Contenido principal -->
+  <div class="flex-1 p-6 bg-gray-50">
+    <div class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-md">
+      <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Ver y Actualizar Datos</h2>
+      <form id="employeeForm" class="space-y-6">
+        <!-- Campo de Nombre -->
         <div class="form-group">
-          <label for="calle">Calle:</label>
-          <input type="text" id="calle" name="calle" required>
+          <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre:</label>
+          <input type="text" id="nombre" name="nombre" [(ngModel)]="nombre" (input)="generarRFC()" required
+                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
         </div>
+
+        <!-- Campo de Apellido Paterno -->
         <div class="form-group">
-          <label for="numeroInterior">Número Interior:</label>
-          <input type="number" id="numeroInterior" name="numeroInterior">
+          <label for="apellidoPaterno" class="block text-sm font-medium text-gray-700">Apellido Paterno:</label>
+          <input type="text" id="apellidoPaterno" name="apellidoPaterno" [(ngModel)]="apellidoPaterno" (input)="generarRFC()" required
+                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
         </div>
+
+        <!-- Campo de Apellido Materno -->
         <div class="form-group">
-          <label for="numeroExterior">Número Exterior:</label>
-          <input type="number" id="numeroExterior" name="numeroExterior" required>
+          <label for="apellidoMaterno" class="block text-sm font-medium text-gray-700">Apellido Materno:</label>
+          <input type="text" id="apellidoMaterno" name="apellidoMaterno" [(ngModel)]="apellidoMaterno" (input)="generarRFC()" required
+                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
         </div>
+
+        <!-- Campo de Fecha de Nacimiento -->
         <div class="form-group">
-          <label for="colonia">Colonia:</label>
-          <input type="text" id="colonia" name="colonia" required>
+          <label for="fechaNacimiento" class="block text-sm font-medium text-gray-700">Fecha de Nacimiento:</label>
+          <input type="date" id="fechaNacimiento" name="fechaNacimiento" [(ngModel)]="fechaNacimiento" (input)="generarRFC()" required
+                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
         </div>
-        <div class="form-group">
-          <label for="codigoPostal">Código Postal:</label>
-          <input type="text" id="codigoPostal" name="codigoPostal" required>
+
+         <!-- Campo de Clave del Empleado (solo lectura) -->
+         <div class="form-group">
+          <label for="claveEmpleado" class="block text-sm font-medium text-gray-700">Clave del Empleado:</label>
+          <input type="text" id="claveEmpleado" name="claveEmpleado" [value]="claveEmpleado" readonly
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
         </div>
+
+        <!-- Campo de RFC (solo lectura) -->
         <div class="form-group">
-          <label for="ciudad">Ciudad:</label>
-          <select id="ciudad" name="ciudad" required>
+          <label for="rfc" class="block text-sm font-medium text-gray-700">RFC:</label>
+          <input type="text" id="rfc" name="rfc" [value]="rfc" readonly
+                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+        </div>
+
+        <!-- Campo de Sexo -->
+        <div class="form-group">
+          <label for="sexo" class="block text-sm font-medium text-gray-700">Sexo:</label>
+          <input type="text" id="sexo" name="sexo" required
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+        </div>
+
+        <!-- Campo de Foto -->
+        <div class="form-group">
+          <label for="foto" class="block text-sm font-medium text-gray-700">Foto:</label>
+          <input type="file" id="foto" name="foto" accept="image/*"
+                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+        </div>
+
+        <!-- Campo de Calle -->
+        <div class="form-group">
+          <label for="calle" class="block text-sm font-medium text-gray-700">Calle:</label>
+          <input type="text" id="calle" name="calle" required
+                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+        </div>
+
+        <!-- Campo de Número Interior -->
+        <div class="form-group">
+          <label for="numeroInterior" class="block text-sm font-medium text-gray-700">Número Interior:</label>
+          <input type="number" id="numeroInterior" name="numeroInterior"
+                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+        </div>
+
+        <!-- Campo de Número Exterior -->
+        <div class="form-group">
+          <label for="numeroExterior" class="block text-sm font-medium text-gray-700">Número Exterior:</label>
+          <input type="number" id="numeroExterior" name="numeroExterior" required
+                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+        </div>
+
+        <!-- Campo de Colonia -->
+        <div class="form-group">
+          <label for="colonia" class="block text-sm font-medium text-gray-700">Colonia:</label>
+          <input type="text" id="colonia" name="colonia" required
+                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+        </div>
+
+        <!-- Campo de Código Postal -->
+        <div class="form-group">
+          <label for="codigoPostal" class="block text-sm font-medium text-gray-700">Código Postal:</label>
+          <input type="text" id="codigoPostal" name="codigoPostal" required
+                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+        </div>
+
+        <!-- Campo de Ciudad -->
+        <div class="form-group">
+          <label for="ciudad" class="block text-sm font-medium text-gray-700">Ciudad:</label>
+          <select id="ciudad" name="ciudad" required
+                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
             <option value="Ciudad de México">Ciudad de México</option>
             <option value="Guadalajara">Guadalajara</option>
             <option value="Monterrey">Monterrey</option>
-            <!-- Más opciones aquí -->
+            <option value="Puebla">Puebla</option>
+            <option value="Tijuana">Tijuana</option>
+            <option value="Mérida">Mérida</option>
+            <option value="León">León</option>
+            <option value="Cancún">Cancún</option>
+            <option value="Querétaro">Querétaro</option>
+            <option value="San Luis Potosí">San Luis Potosí</option>
           </select>
         </div>
-      </div>
 
-      <!-- Sección de Contacto -->
-      <div class="form-section">
-        <h2>Contacto</h2>
-        <div class="form-group">
-          <label>Teléfonos:</label>
-          <div id="telefonos">
-            <input type="text" name="telefono" placeholder="Número de teléfono">
-          </div>
-          <button type="button" onclick="agregarTelefono()">Agregar Teléfono</button>
-        </div>
-        <div class="form-group">
-          <label>Correos Electrónicos:</label>
-          <div id="correos">
-            <input type="email" name="correo" placeholder="Correo electrónico">
-          </div>
-          <button type="button" onclick="agregarCorreo()">Agregar Correo</button>
-        </div>
-      </div>
 
-      <!-- Botones de Acción -->
-      <div class="form-actions">
-        <button type="submit">Guardar Cambios</button>
-        <button type="button" onclick="limpiarFormulario()">Cancelar</button>
-      </div>
-    </form>
+        <!-- Sección de Teléfonos -->
+        <div class="form-group">
+          <label class="block text-sm font-medium text-gray-700">Teléfonos:</label>
+          <div *ngFor="let telefono of telefonos; let i = index" class="flex items-center space-x-2 mb-2">
+            <input type="text" [(ngModel)]="telefonos[i]" name="telefonos[]" required
+                   class="flex-1 mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+          </div>
+          <button type="button" (click)="agregarTelefono()"
+                  class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
+            Agregar Teléfono
+          </button>
+        </div>
+
+        <!-- Sección de Correos -->
+        <div class="form-group">
+          <label class="block text-sm font-medium text-gray-700">Correos:</label>
+          <div *ngFor="let correo of correos; let i = index" class="flex items-center space-x-2 mb-2">
+            <input type="email" [(ngModel)]="correos[i]" name="correos[]" required
+                   class="flex-1 mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+          </div>
+          <button type="button" (click)="agregarCorreo()"
+          class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
+          Agregar Correo
+          </button>
+        </div>
+
+        <!-- Sección de Referencias -->
+        <div class="form-group">
+          <label class="block text-sm font-medium text-gray-700">Referencias:</label>
+          <div *ngFor="let referencia of referencias; let i = index" class="mb-4">
+            <div class="flex items-center space-x-2 mb-2">
+              <input type="text" [(ngModel)]="referencias[i].nombre" placeholder="Nombre" required
+                     class="flex-1 mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+              <input type="text" [(ngModel)]="referencias[i].parentesco" placeholder="Parentesco" required
+                     class="flex-1 mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+              <input type="text" [(ngModel)]="referencias[i].telefono" placeholder="Teléfono" required
+                     class="flex-1 mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+              <input type="email" [(ngModel)]="referencias[i].correo" placeholder="Correo" required
+                     class="flex-1 mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+            </div>
+          </div>
+          <button type="button" (click)="agregarReferencia()"
+          class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
+          Agregar Referencia
+          </button>
+        </div>
+
+        <!-- Botones de Guardar y Cancelar -->
+        <div class="flex space-x-4">
+          <button type="submit"
+                  class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            Guardar
+          </button>
+          <button type="button" (click)="limpiarFormulario()"
+                  class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">
+            Cancelar
+          </button>
+        </div>
+
+
+      </form>
+    </div>
   </div>
+</div>
