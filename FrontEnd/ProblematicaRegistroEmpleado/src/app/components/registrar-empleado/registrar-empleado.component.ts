@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common'; // Para *ngFor
-import { FormsModule } from '@angular/forms'; // Para ngModel
-import { RhNavegacionComponent } from '../rh-navegacion/rh-navegacion.component';
-// C:\U3Proyecto_NBD\FrontEnd\ProblematicaRegistroEmpleado\src\app\components\registrar-empleado\registrar-empleado.component.ts
+import { CommonModule } from '@angular/common'; 
+import { FormsModule } from '@angular/forms'; 
+import { RhNavegacionComponent } from "../rh-navegacion/rh-navegacion.component";
+import { EmpleadoService } from '../../services/empleado.service';
+
 @Component({
   selector: 'app-registrar-empleado',
   standalone: true,
   imports: [
-    CommonModule, // Necesario para *ngFor
-    FormsModule, // Necesario para ngModel
+    CommonModule, 
+    FormsModule, 
     RhNavegacionComponent
   ],
   templateUrl: './registrar-empleado.component.html',
@@ -22,31 +23,38 @@ export class RegistrarEmpleadoComponent {
   rfc: string = '';
   claveEmpleado: string = ''; // Nueva propiedad para almacenar la clave del empleado
 
-  telefonos: string[] = ['']; // Inicializa con un campo vacío
-  correos: string[] = ['']; // Inicializa con un campo vacío
+  telefonos: string[] = [''];
+  correos: string[] = [''];
   referencias: { nombre: string; parentesco: string; telefono: string; correo: string }[] = [
     { nombre: '', parentesco: '', telefono: '', correo: '' }
   ];
 
-  // Función para generar el RFC en tiempo real
+  mensaje: string = ''; // Para mostrar mensajes al usuario
+  error: string = ''; // Para manejar errores
+
+  constructor(private empleadoService: EmpleadoService) {}
+
+  // Generar RFC en tiempo real
   generarRFC(): void {
     if (!this.nombre || !this.apellidoPaterno || !this.apellidoMaterno || !this.fechaNacimiento) {
-      this.rfc = ''; // Limpiar el RFC si falta algún dato
+      this.rfc = '';
       return;
     }
 
-    // Obtener las iniciales del nombre y apellidos
     const inicialNombre = this.nombre.charAt(0).toUpperCase();
     const inicialApellidoPaterno = this.apellidoPaterno.charAt(0).toUpperCase();
     const inicialApellidoMaterno = this.apellidoMaterno.charAt(0).toUpperCase();
 
-    // Obtener la fecha en formato YYMMDD
     const date = new Date(this.fechaNacimiento);
-    const year = date.getFullYear().toString().slice(-2); // Últimos 2 dígitos del año
-    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Mes (agregar 1 porque los meses van de 0 a 11)
-    const day = date.getDate().toString().padStart(2, '0'); // Día
+    if (isNaN(date.getTime())) {
+      this.rfc = '';
+      return;
+    }
 
-    // Generar el RFC
+    const year = date.getFullYear().toString().slice(-2);
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+
     this.rfc = `${inicialApellidoPaterno}${inicialApellidoMaterno}${inicialNombre}${year}${month}${day}`;
 
     // Llama a la función para generar la clave del empleado
@@ -72,19 +80,49 @@ export class RegistrarEmpleadoComponent {
     this.claveEmpleado = `${inicialNombre}${inicialApellidoPaterno}${inicialApellidoMaterno}-${consecutivo}`;
   }
 
-  // Agregar Teléfono
-  agregarTelefono(): void {
-    this.telefonos.push('');
+  // Agregar o eliminar elementos dinámicos
+  agregarTelefono(): void { this.telefonos.push(''); }
+  eliminarTelefono(index: number): void { this.telefonos.splice(index, 1); }
+
+  agregarCorreo(): void { this.correos.push(''); }
+  eliminarCorreo(index: number): void { this.correos.splice(index, 1); }
+
+  agregarReferencia(): void { this.referencias.push({ nombre: '', parentesco: '', telefono: '', correo: '' }); }
+  eliminarReferencia(index: number): void { this.referencias.splice(index, 1); }
+
+  // Enviar datos al backend
+  registrarEmpleado(): void {
+    if (!this.validarFormulario()) {
+      this.error = "Por favor, completa todos los campos obligatorios.";
+      return;
+    }
+
+    const empleado = {
+      nombre: this.nombre,
+      apellidoPaterno: this.apellidoPaterno,
+      apellidoMaterno: this.apellidoMaterno,
+      fechaNacimiento: this.fechaNacimiento,
+      rfc: this.rfc,
+      telefonos: this.telefonos.filter(t => t.trim() !== ''),
+      correos: this.correos.filter(c => c.trim() !== ''),
+      referencias: this.referencias.filter(r => r.nombre.trim() !== ''),
+    };
+
+    this.empleadoService.registrarEmpleado(empleado).subscribe(
+      response => {
+        this.mensaje = "¡Empleado registrado con éxito!";
+        this.limpiarFormulario();
+      },
+      error => {
+        this.error = "Hubo un error al registrar el empleado.";
+        console.error("Error al registrar:", error);
+      }
+    );
   }
 
-  // Agregar Correo
-  agregarCorreo(): void {
-    this.correos.push('');
-  }
-
-  // Agregar Referencia
-  agregarReferencia(): void {
-    this.referencias.push({ nombre: '', parentesco: '', telefono: '', correo: '' });
+  // Validar que el formulario esté completo antes de enviar
+  private validarFormulario(): boolean {
+    return !!(this.nombre && this.apellidoPaterno && this.apellidoMaterno && this.fechaNacimiento);
   }
 
   // Limpiar formulario

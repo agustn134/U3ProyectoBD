@@ -4,6 +4,7 @@ import { provideHttpClient } from '@angular/common/http'; // Para peticiones HTT
 import { routes } from './app.routes';
 import { EmpleadoService } from './services/empleado.service';
 
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),

@@ -1,28 +1,33 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const empleadoRoutes = require('./routes/empleadoRoutes');
+const conectarDB = require('./config/db'); 
+const cors = require("cors");
 
-dotenv.config(); // Cargar variables de entorno
+dotenv.config(); 
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-
-// Middleware para parsear JSON
 app.use(express.json());
 
-// Conectar a MongoDB
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => console.log('Conectado a MongoDB'))
-.catch((err) => console.error('Error conectando a MongoDB:', err));
+// 
+conectarDB();
+app.use(cors());
 
-// Rutas
+
+// Importar las rutas
+const empleadoRoutes = require('./routes/empleadoRoutes');
+const cursosRoutes = require('./routes/cursosRoutes');  // <-- FALTA ESTA LÍNEA
+
+//
 app.use('/api/empleados', empleadoRoutes);
+app.use('/api/cursos', cursosRoutes);  
 
-// Iniciar servidor
+//
+app.get('/', (req, res) => {
+    res.send("Hola");
+});
+
 app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+    console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });

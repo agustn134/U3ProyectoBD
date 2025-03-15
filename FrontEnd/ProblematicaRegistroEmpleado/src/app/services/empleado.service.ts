@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root', // El servicio está disponible en toda la aplicación
 })
 export class EmpleadoService {
-  private apiUrl = '/api/empleados'; // URL del backend
+  private apiUrl = 'http://localhost:5000/api/empleados'; // URL del backend
 
   constructor(private http: HttpClient) { }
 
@@ -16,7 +16,9 @@ export class EmpleadoService {
   }
 
   // Método para crear un empleado
-  createEmpleado(empleado: any): Observable<any> {
+  registrarEmpleado(empleado: any): Observable<any> {
     return this.http.post(this.apiUrl, empleado);
   }
+
+
 }
