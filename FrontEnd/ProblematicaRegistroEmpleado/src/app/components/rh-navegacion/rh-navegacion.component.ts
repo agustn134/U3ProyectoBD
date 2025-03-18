@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-rh-navegacion',
-  imports: [
-    RouterLink,
-    RouterModule
-  ],
   templateUrl: './rh-navegacion.component.html',
-  styleUrl: './rh-navegacion.component.css'
+  styleUrls: ['./rh-navegacion.component.css'],
+  standalone: true,
+  imports: [RouterModule, CommonModule]
 })
 export class RhNavegacionComponent {
-
+  // Propiedades y métodos del componente de navegación
 }

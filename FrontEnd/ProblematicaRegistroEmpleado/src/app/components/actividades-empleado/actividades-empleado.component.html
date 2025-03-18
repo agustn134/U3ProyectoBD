@@ -1,31 +1,61 @@
 <div class="flex min-h-screen">
-  <!-- Barra de navegación -->
-  <app-empleado-navegacion class="w-64 flex-shrink-0"></app-empleado-navegacion>
-  <div class="flex-1 p-6 bg-gray-50">
-
-  <!-- Lista de Actividades -->
-    <div class="overflow-x-auto">
-      <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Ver Actividades</h2>
-      <table class="w-full text-sm text-left text-gray-500">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-          <tr>
-            <th scope="col" class="px-6 py-3">Nombre de la Actividad</th>
-            <th scope="col" class="px-6 py-3">Estatus</th>
-            <th scope="col" class="px-6 py-3">Fecha de Inicio</th>
-            <th scope="col" class="px-6 py-3">Fecha de Término</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let actividad of actividades; let i = index" class="bg-white border-b hover:bg-gray-50">
-            <td class="px-6 py-4">{{ actividad.nombre }}</td>
-            <td class="px-6 py-4">{{ actividad.estatus }}</td>
-            <td class="px-6 py-4">{{ actividad.fechaInicio }}</td>
-            <td class="px-6 py-4">{{ actividad.fechaTermino }}</td>
-          </tr>
-        </tbody>
-      </table>
+  <div class="flex min-h-screen">
+    <!-- Barra de navegación -->
+    <app-rh-navegacion class="w-64 flex-shrink-0"></app-rh-navegacion>
+  
+    <!-- Contenido principal -->
+    <div class="flex-1 p-6 bg-gray-50">
+      <div class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-md">
+        <h2 class="text-2xl font-bold mb-6 text-gray-800">Actividades del Empleado</h2>
+  
+        <!-- Tabla de actividades -->
+        <div class="overflow-x-auto">
+          <table class="min-w-full bg-white border">
+            <thead>
+              <tr>
+                <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                  #
+                </th>
+                <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                  Actividad
+                </th>
+                <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                  Fecha
+                </th>
+                <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                  Estado
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Usando la nueva sintaxis @for en lugar de *ngFor -->
+              @for (actividad of actividades; track $index) {
+                <tr class="hover:bg-gray-100">
+                  <td class="px-6 py-4 whitespace-nowrap border-b border-gray-200">{{$index + 1}}</td>
+                  <td class="px-6 py-4 whitespace-nowrap border-b border-gray-200">{{actividad.descripcion}}</td>
+                  <td class="px-6 py-4 whitespace-nowrap border-b border-gray-200">{{actividad.fecha | date:'dd/MM/yyyy'}}</td>
+                  <td class="px-6 py-4 whitespace-nowrap border-b border-gray-200">
+                    <span [ngClass]="{
+                      'px-2 py-1 rounded-full text-xs text-white': true,
+                      'bg-green-500': actividad.estado === 'Completada',
+                      'bg-yellow-500': actividad.estado === 'En Proceso',
+                      'bg-red-500': actividad.estado === 'Pendiente'
+                    }">
+                      {{actividad.estado}}
+                    </span>
+                  </td>
+                </tr>
+              }
+              
+              <!-- Mensaje si no hay actividades -->
+              @if (actividades.length === 0) {
+                <tr>
+                  <td colspan="4" class="px-6 py-4 text-center text-gray-500">No hay actividades registradas</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
-
   </div>
-
-</div>

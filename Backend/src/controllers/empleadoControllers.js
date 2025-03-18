@@ -79,3 +79,32 @@ exports.actualizarEmpleado = async (req, res) => {
     }
 };
 
+exports.buscarEmpleados = async (req, res) => {
+  try {
+    let { termino } = req.query;
+    
+    if (!termino || termino.trim() === '') {
+      return res.status(400).json({ mensaje: "El término de búsqueda es requerido" });
+    }
+
+    let consulta = {
+      $or: [
+        { claveEmpleado: { $regex: termino, $options: 'i' } },
+        { RFC: { $regex: termino, $options: 'i' } },
+        { 'nombreCompleto.apellidoPaterno': { $regex: termino, $options: 'i' } },
+        { 'nombreCompleto.apellidoMaterno': { $regex: termino, $options: 'i' } }
+      ]
+    };
+
+    let empleados = await Empleado.find(consulta);
+    
+    if (empleados.length === 0) {
+      return res.status(404).json({ mensaje: "No se encontraron empleados con ese criterio de búsqueda" });
+    }
+
+    res.json(empleados);
+  } catch (error) {
+    console.error("Error en la búsqueda de empleados:", error);
+    res.status(500).json({ mensaje: "Error al realizar la búsqueda" });
+  }
+};

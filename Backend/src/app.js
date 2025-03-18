@@ -18,10 +18,13 @@ app.use(cors());
 // Importar las rutas
 const empleadoRoutes = require('./routes/empleadoRoutes');
 const cursosRoutes = require('./routes/cursosRoutes');  // <-- FALTA ESTA LÍNEA
+const actividadesRoutes = require('./routes/actividadesRoutes');
+
 
 //
 app.use('/api/empleados', empleadoRoutes);
 app.use('/api/cursos', cursosRoutes);  
+app.use('/api/actividades', actividadesRoutes);
 
 //
 app.get('/', (req, res) => {

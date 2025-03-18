@@ -9,6 +9,6 @@ const cursosSchema = new mongoose.Schema({
         tipoDocumento: { type: String, enum: ['Constancia', 'Título', 'Diploma'], required: true },
         rutaArchivo: { type: String, required: true }
     }
-});
+}); 
 
 module.exports = mongoose.model('Cursos', cursosSchema);

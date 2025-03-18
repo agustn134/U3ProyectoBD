@@ -32,6 +32,7 @@ const empleadoSchema = new mongoose.Schema({
       correoElectronicoFamiliar: { type: String, default: "" },
     },
   ],
+  cursosEmpleado:[{type: String}]
 });
 
 module.exports = mongoose.model('Empleado', empleadoSchema);

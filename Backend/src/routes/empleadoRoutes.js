@@ -13,6 +13,8 @@ router.put('/:claveEmpleado', empleadoController.actualizarEmpleado);
 router.get('/:claveEmpleado', empleadoController.mostrarEmpleado);
 //Eliminar un Empleado
 router.delete('/:claveEmpleado', empleadoController.eliminarEmpleado);
+//Buscar empleado
+router.get('/buscar', empleadoController.buscarEmpleados);
 
 
 

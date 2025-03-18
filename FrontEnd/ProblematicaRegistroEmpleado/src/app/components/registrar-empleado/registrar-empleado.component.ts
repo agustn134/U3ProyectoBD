@@ -16,23 +16,72 @@ import { EmpleadoService } from '../../services/empleado.service';
   styleUrls: ['./registrar-empleado.component.css']
 })
 export class RegistrarEmpleadoComponent {
+  // Datos básicos
   nombre: string = '';
   apellidoPaterno: string = '';
   apellidoMaterno: string = '';
   fechaNacimiento: string = '';
   rfc: string = '';
-  claveEmpleado: string = ''; // Nueva propiedad para almacenar la clave del empleado
-
+  claveEmpleado: string = '';
+  sexo: string = 'Masculino';
+  
+  // Domicilio
+  calle: string = '';
+  numeroInterior: string = '';
+  numeroExterior: string = '';
+  colonia: string = '';
+  codigoPostal: string = '';
+  ciudad: string = '';
+  
+  // Datos laborales
+  departamento: string = '';
+  puesto: string = '';
+  cursos: string[] = [''];
+  
+  // Contacto y referencias
   telefonos: string[] = [''];
   correos: string[] = [''];
   referencias: { nombre: string; parentesco: string; telefono: string; correo: string }[] = [
     { nombre: '', parentesco: '', telefono: '', correo: '' }
   ];
 
-  mensaje: string = ''; // Para mostrar mensajes al usuario
-  error: string = ''; // Para manejar errores
+  mensaje: string = '';
+  error: string = '';
 
-  constructor(private empleadoService: EmpleadoService) {}
+  consecutivoActual: number = 1;
+
+  constructor(private empleadoService: EmpleadoService) {
+    // Idealmente, obtener el último consecutivo de la base de datos
+    this.obtenerUltimoConsecutivo();
+  }
+
+  obtenerUltimoConsecutivo(): void {
+    this.empleadoService.obtenerEmpleados().subscribe(
+      empleados => {
+        if (empleados && empleados.length > 0) {
+          // Extraer los consecutivos de las claves existentes (asumiendo formato XYZ-001)
+          const consecutivos = empleados
+            .map((emp: { claveEmpleado: string; }) => {
+              const match = emp.claveEmpleado.match(/-(\d+)$/);
+              return match ? parseInt(match[1], 10) : 0;
+            })
+            .filter((num: number) => !isNaN(num));
+          
+          if (consecutivos.length > 0) {
+            this.consecutivoActual = Math.max(...consecutivos) + 1;
+          }
+        }
+        // Generar clave si ya tenemos los datos
+        if (this.nombre && this.apellidoPaterno && this.apellidoMaterno) {
+          this.generarClaveEmpleado();
+        }
+      },
+      error => {
+        console.error('Error al obtener consecutivo:', error);
+        // Si hay error, seguimos con el consecutivo por defecto
+      }
+    );
+  }
 
   // Generar RFC en tiempo real
   generarRFC(): void {
@@ -64,31 +113,35 @@ export class RegistrarEmpleadoComponent {
   // Función para generar la clave del empleado en tiempo real
   generarClaveEmpleado(): void {
     if (!this.nombre || !this.apellidoPaterno || !this.apellidoMaterno) {
-      this.claveEmpleado = ''; // Limpiar la clave si falta algún dato
+      this.claveEmpleado = '';
       return;
     }
 
-    // Obtener las iniciales del nombre, apellido paterno y apellido materno
     const inicialNombre = this.nombre.charAt(0).toUpperCase();
     const inicialApellidoPaterno = this.apellidoPaterno.charAt(0).toUpperCase();
     const inicialApellidoMaterno = this.apellidoMaterno.charAt(0).toUpperCase();
+    const consecutivo = this.consecutivoActual.toString().padStart(3, '0');
 
-    // Consecutivo ficticio (puedes ajustarlo según tu base de datos)
-    const consecutivo = ('001').padStart(3, '0'); // Por simplicidad, usaremos "001" como consecutivo inicial
-
-    // Generar la clave del empleado
     this.claveEmpleado = `${inicialNombre}${inicialApellidoPaterno}${inicialApellidoMaterno}-${consecutivo}`;
   }
 
   // Agregar o eliminar elementos dinámicos
   agregarTelefono(): void { this.telefonos.push(''); }
-  eliminarTelefono(index: number): void { this.telefonos.splice(index, 1); }
+  eliminarTelefono(index: number): void { 
+    this.telefonos.splice(index, 1); }
 
   agregarCorreo(): void { this.correos.push(''); }
-  eliminarCorreo(index: number): void { this.correos.splice(index, 1); }
+  eliminarCorreo(index: number): void { 
+    this.correos.splice(index, 1); }
 
   agregarReferencia(): void { this.referencias.push({ nombre: '', parentesco: '', telefono: '', correo: '' }); }
-  eliminarReferencia(index: number): void { this.referencias.splice(index, 1); }
+  eliminarReferencia(index: number): void {
+     this.referencias.splice(index, 1); }
+
+  agregarCurso(): void {this.cursos.push('') }
+  eliminarCurso(index: number): void {
+    this.cursos.splice(index, 1);
+  }
 
   // Enviar datos al backend
   registrarEmpleado(): void {
@@ -98,11 +151,25 @@ export class RegistrarEmpleadoComponent {
     }
 
     const empleado = {
+      claveEmpleado: this.claveEmpleado,
       nombre: this.nombre,
       apellidoPaterno: this.apellidoPaterno,
       apellidoMaterno: this.apellidoMaterno,
       fechaNacimiento: this.fechaNacimiento,
       rfc: this.rfc,
+      sexo: this.sexo,
+      // Domicilio
+      calle: this.calle,
+      numeroInterior: this.numeroInterior,
+      numeroExterior: this.numeroExterior,
+      colonia: this.colonia,
+      codigoPostal: this.codigoPostal,
+      ciudad: this.ciudad,
+      // Datos laborales
+      departamento: this.departamento,
+      puesto: this.puesto,
+      cursos: this.cursos,
+      // Contacto
       telefonos: this.telefonos.filter(t => t.trim() !== ''),
       correos: this.correos.filter(c => c.trim() !== ''),
       referencias: this.referencias.filter(r => r.nombre.trim() !== ''),
@@ -112,6 +179,8 @@ export class RegistrarEmpleadoComponent {
       response => {
         this.mensaje = "¡Empleado registrado con éxito!";
         this.limpiarFormulario();
+        // Incrementar el consecutivo para el próximo empleado
+        this.consecutivoActual++;
       },
       error => {
         this.error = "Hubo un error al registrar el empleado.";
@@ -122,19 +191,56 @@ export class RegistrarEmpleadoComponent {
 
   // Validar que el formulario esté completo antes de enviar
   private validarFormulario(): boolean {
-    return !!(this.nombre && this.apellidoPaterno && this.apellidoMaterno && this.fechaNacimiento);
+    return !!(
+      this.nombre && 
+      this.apellidoPaterno && 
+      this.apellidoMaterno && 
+      this.fechaNacimiento &&
+      this.rfc &&
+      this.sexo &&
+      this.calle &&
+      this.numeroExterior &&
+      this.colonia &&
+      this.codigoPostal &&
+      this.ciudad &&
+      this.departamento &&
+      this.puesto &&
+      this.telefonos.some(tel => tel.trim() !== '')
+      
+    );
   }
 
   // Limpiar formulario
   limpiarFormulario(): void {
+    // Datos básicos
     this.nombre = '';
     this.apellidoPaterno = '';
     this.apellidoMaterno = '';
     this.fechaNacimiento = '';
     this.rfc = '';
-    this.claveEmpleado = ''; // Reiniciar la clave del empleado
-    this.telefonos = ['']; // Reiniciar con un campo vacío
-    this.correos = ['']; // Reiniciar con un campo vacío
-    this.referencias = [{ nombre: '', parentesco: '', telefono: '', correo: '' }]; // Reiniciar con una referencia vacía
+    this.claveEmpleado = '';
+    this.sexo = 'Masculino';
+    
+    // Domicilio
+    this.calle = '';
+    this.numeroInterior = '';
+    this.numeroExterior = '';
+    this.colonia = '';
+    this.codigoPostal = '';
+    this.ciudad = '';
+    
+    // Datos laborales
+    this.departamento = '';
+    this.puesto = '';
+    this.cursos = [''];
+    
+    // Contacto y referencias
+    this.telefonos = [''];
+    this.correos = [''];
+    this.referencias = [{ nombre: '', parentesco: '', telefono: '', correo: '' }];
+    
+    // Limpiar mensajes
+    this.mensaje = '';
+    this.error = '';
   }
-}
+};
