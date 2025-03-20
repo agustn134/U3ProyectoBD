@@ -1,9 +1,7 @@
-<div class="flex min-h-screen">
-  <!-- Barra de navegación -->
+<!-- <div class="flex min-h-screen">
   <app-empleado-navegacion class="w-64 flex-shrink-0"></app-empleado-navegacion>
   <div class="flex-1 p-6 bg-gray-50">
 
-    <!-- Botón para Agregar Curso -->
     <div class="flex justify-end mb-4">
       <button
         (click)="abrirFormularioCurso()"
@@ -11,7 +9,7 @@
       >
         Agregar Curso
       </button>
-    </div>
+    </div> -->
 
     <!-- Lista de Cursos -->
     <!-- <div class="overflow-x-auto">
@@ -36,7 +34,7 @@
     </div> -->
 
     <!-- Lista de Cursos -->
-<div class="overflow-x-auto">
+<!-- <div class="overflow-x-auto">
   <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Ver Cursos</h2>
   <table class="w-full text-sm text-left text-gray-500">
     <thead class="text-xs text-gray-700 uppercase bg-gray-50">
@@ -59,7 +57,45 @@
       </tr>
     </tbody>
   </table>
-</div>
+</div> -->
+
+
+<!-- Lista de Cursos (modificación) -->
+<!-- <div class="overflow-x-auto">
+  <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Ver Cursos</h2>
+  <table class="w-full text-sm text-left text-gray-500">
+    <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+      <tr>
+        <th scope="col" class="px-6 py-3">Nombre del Curso</th>
+        <th scope="col" class="px-6 py-3">Fecha de Inicio</th>
+        <th scope="col" class="px-6 py-3">Fecha de Término</th>
+        <th scope="col" class="px-6 py-3">Tipo de Documento</th>
+        <th scope="col" class="px-6 py-3">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (curso of cursos; track $index) {
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4">{{ curso.nombre }}</td>
+          <td class="px-6 py-4">{{ curso.inicio }}</td>
+          <td class="px-6 py-4">{{ curso.termino }}</td>
+          <td class="px-6 py-4">{{ curso.tipoDocumento }}</td>
+          <td class="px-6 py-4">
+            <button
+              (click)="abrirDetalleCurso(curso)"
+              class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+            >
+              Ver detalles
+            </button>
+          </td>
+        </tr>
+      }
+      <tr *ngIf="cursos.length === 0">
+        <td colspan="5" class="px-6 py-4 text-center text-gray-500">No hay cursos disponibles</td>
+      </tr>
+    </tbody>
+  </table>
+</div> -->
 
     <!-- Formulario de Registro de Curso -->
     <!-- <div *ngIf="mostrarFormularioCurso" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
@@ -122,7 +158,7 @@
 
 
 <!-- Formulario de Registro de Curso -->
-<div *ngIf="mostrarFormularioCurso" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+<!-- <div *ngIf="mostrarFormularioCurso" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
   <div class="bg-white w-full max-w-2xl p-6 rounded-lg shadow-md relative">
     <span (click)="cerrarFormularioCurso()" class="absolute top-2 right-2 text-2xl cursor-pointer">&times;</span>
     <h3 class="text-xl font-bold text-gray-800 mb-4">Registrar Nuevo Curso</h3>
@@ -202,9 +238,304 @@
       </div>
     </form>
   </div>
+</div> -->
+
+
+<!-- Modificación del formulario de curso -->
+<!-- <div *ngIf="mostrarFormularioCurso" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+  <div class="bg-white w-full max-w-2xl p-6 rounded-lg shadow-md relative">
+    <span (click)="cerrarFormularioCurso()" class="absolute top-2 right-2 text-2xl cursor-pointer">&times;</span>
+    <h3 class="text-xl font-bold text-gray-800 mb-4">Registrar Nuevo Curso</h3>
+    <form (ngSubmit)="guardarCurso()">
+      <div class="form-group mb-4">
+        <label for="nombreCurso" class="block text-sm font-medium text-gray-700">Nombre del Curso:</label>
+        <input
+          type="text"
+          id="nombreCurso"
+          [(ngModel)]="cursoForm.nombre"
+          name="nombreCurso"
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          required
+        />
+      </div>
+      <div class="form-group mb-4">
+        <label for="fechaInicio" class="block text-sm font-medium text-gray-700">Fecha de Inicio:</label>
+        <input
+          type="date"
+          id="fechaInicio"
+          [(ngModel)]="cursoForm.fechaInicio"
+          name="fechaInicio"
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          required
+        />
+      </div>
+      <div class="form-group mb-4">
+        <label for="fechaTermino" class="block text-sm font-medium text-gray-700">Fecha de Término:</label>
+        <input
+          type="date"
+          id="fechaTermino"
+          [(ngModel)]="cursoForm.fechaTermino"
+          name="fechaTermino"
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          required
+        />
+      </div>
+      <div class="form-group mb-4">
+        <label for="tipoDocumento" class="block text-sm font-medium text-gray-700">Tipo de Documento:</label>
+        <select
+          id="tipoDocumento"
+          [(ngModel)]="cursoForm.tipoDocumento"
+          name="tipoDocumento"
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          required
+        >
+          <option *ngFor="let tipo of tiposDocumento" [value]="tipo">{{ tipo }}</option>
+        </select>
+      </div>
+
+      <div class="form-group mb-6">
+        <label class="block text-sm font-medium text-gray-700 mb-2">Documento del Curso:</label>
+        <app-file-upload
+          [tipoDocumento]="'cursos'"
+          [accept]="'.pdf,.doc,.docx'"
+          [allowedFileTypes]="'Archivos permitidos: PDF, Word'"
+          (fileUploaded)="onFileUploaded($event)"
+        ></app-file-upload>
+      </div>
+
+      <div class="flex justify-end">
+        <button
+          type="button"
+          (click)="cerrarFormularioCurso()"
+          class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500"
+        >
+          Cancelar
+        </button>
+        <button
+          type="submit"
+          [disabled]="uploading || !cursoForm.rutaArchivo"
+          [class]="'ml-2 px-4 py-2 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ' +
+            (uploading || !cursoForm.rutaArchivo ? 'bg-blue-300 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700')"
+        >
+          {{ uploading ? 'Subiendo...' : 'Guardar' }}
+        </button>
+      </div>
+
+
+      <div *ngIf="errorMensaje" class="mt-4 p-3 bg-red-100 text-red-700 rounded-md">
+        {{ errorMensaje }}
+      </div>
+    </form>
+  </div>
 </div>
 
 
+  </div>
+</div> -->
+
+
+
+
+<div class="flex min-h-screen">
+  <!-- Barra de navegación -->
+  <app-empleado-navegacion class="w-64 flex-shrink-0"></app-empleado-navegacion>
+  <div class="flex-1 p-6 bg-gray-50">
+
+    <!-- Botón para Agregar Curso -->
+    <div class="flex justify-end mb-4">
+      <button
+        (click)="abrirFormularioCurso()"
+        class="px-4 py-2 bg-yellow-500 text-black rounded-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+      >
+        Agregar Curso
+      </button>
+    </div>
+
+    <!-- Lista de Cursos (modificación) -->
+    <div class="overflow-x-auto">
+      <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Ver Cursos</h2>
+      <table class="w-full text-sm text-left text-gray-500">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+          <tr>
+            <th scope="col" class="px-6 py-3">Nombre del Curso</th>
+            <th scope="col" class="px-6 py-3">Fecha de Inicio</th>
+            <th scope="col" class="px-6 py-3">Fecha de Término</th>
+            <th scope="col" class="px-6 py-3">Tipo de Documento</th>
+            <!-- <th scope="col" class="px-6 py-3">Acciones</th>  -->
+          </tr>
+        </thead>
+        <tbody>
+          @for (curso of cursos; track $index) {
+            <tr class="bg-white border-b hover:bg-gray-50">
+              <td class="px-6 py-4">{{ curso.nombre }}</td>
+              <td class="px-6 py-4">{{ curso.inicio }}</td>
+              <td class="px-6 py-4">{{ curso.termino }}</td>
+              <td class="px-6 py-4">{{ curso.tipoDocumento }}</td>
+              <!-- <td class="px-6 py-4">
+                <button
+                  (click)="abrirDetalleCurso(curso)"
+                  class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+                >
+                  Ver detalles
+                </button>
+              </td> -->
+            </tr>
+          }
+          <tr *ngIf="cursos.length === 0">
+            <td colspan="5" class="px-6 py-4 text-center text-gray-500">No hay cursos disponibles</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Modificación del formulario de curso -->
+    <div *ngIf="mostrarFormularioCurso" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      <div class="bg-white w-full max-w-2xl p-6 rounded-lg shadow-md relative">
+        <span (click)="cerrarFormularioCurso()" class="absolute top-2 right-2 text-2xl cursor-pointer">&times;</span>
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Registrar Nuevo Curso</h3>
+        <form (ngSubmit)="guardarCurso()">
+          <div class="form-group mb-4">
+            <label for="nombreCurso" class="block text-sm font-medium text-gray-700">Nombre del Curso:</label>
+            <input
+              type="text"
+              id="nombreCurso"
+              [(ngModel)]="cursoForm.nombre"
+              name="nombreCurso"
+              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
+          </div>
+          <div class="form-group mb-4">
+            <label for="fechaInicio" class="block text-sm font-medium text-gray-700">Fecha de Inicio:</label>
+            <input
+              type="date"
+              id="fechaInicio"
+              [(ngModel)]="cursoForm.fechaInicio"
+              name="fechaInicio"
+              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
+          </div>
+          <div class="form-group mb-4">
+            <label for="fechaTermino" class="block text-sm font-medium text-gray-700">Fecha de Término:</label>
+            <input
+              type="date"
+              id="fechaTermino"
+              [(ngModel)]="cursoForm.fechaTermino"
+              name="fechaTermino"
+              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
+          </div>
+          <div class="form-group mb-4">
+            <label for="tipoDocumento" class="block text-sm font-medium text-gray-700">Tipo de Documento:</label>
+            <select
+              id="tipoDocumento"
+              [(ngModel)]="cursoForm.tipoDocumento"
+              name="tipoDocumento"
+              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            >
+              <option *ngFor="let tipo of tiposDocumento" [value]="tipo">{{ tipo }}</option>
+            </select>
+          </div>
+
+          <!-- Reemplazar el campo de texto de ruta de archivo por el componente de carga -->
+          <div class="form-group mb-6">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Documento del Curso:</label>
+            <app-file-upload
+              [tipoDocumento]="'cursos'"
+              [accept]="'.pdf,.doc,.docx'"
+              [allowedFileTypes]="'Archivos permitidos: PDF, Word'"
+              (fileUploaded)="onFileUploaded($event)"
+            ></app-file-upload>
+          </div>
+
+          <div class="flex justify-end">
+            <button
+              type="button"
+              (click)="cerrarFormularioCurso()"
+              class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              [disabled]="uploading || !cursoForm.rutaArchivo"
+              [class]="'ml-2 px-4 py-2 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ' +
+                (uploading || !cursoForm.rutaArchivo ? 'bg-blue-300 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700')"
+            >
+              {{ uploading ? 'Subiendo...' : 'Guardar' }}
+            </button>
+          </div>
+
+          <!-- Mensajes de alerta -->
+          <div *ngIf="errorMensaje" class="mt-4 p-3 bg-red-100 text-red-700 rounded-md">
+            {{ errorMensaje }}
+          </div>
+        </form>
+      </div>
+    </div>
 
   </div>
+
+  <!-- Boton para ver detalles del curso -->
+  <!-- <div *ngIf="cursoSeleccionado" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <div class="bg-white w-full max-w-3xl p-6 rounded-lg shadow-md relative">
+
+      <button (click)="cerrarDetalleCurso()" class="absolute top-3 right-3 text-gray-500 hover:text-gray-700">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+
+      <div class="mb-6">
+        <h2 class="text-2xl font-bold text-gray-800">{{ cursoSeleccionado.nombre }}</h2>
+        <p class="text-gray-600">{{ cursoSeleccionado.tipoDocumento }}</p>
+      </div>
+
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div>
+          <h3 class="text-sm font-medium text-gray-500">Fecha de inicio</h3>
+          <p class="mt-1 text-base text-gray-900">{{ cursoSeleccionado.inicio }}</p>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-gray-500">Fecha de término</h3>
+          <p class="mt-1 text-base text-gray-900">{{ cursoSeleccionado.termino }}</p>
+        </div>
+        <div class="md:col-span-2">
+          <h3 class="text-sm font-medium text-gray-500">Empleado</h3>
+          <p class="mt-1 text-base text-gray-900">{{ cursoSeleccionado.empleado }}</p>
+        </div>
+      </div>
+
+
+      <div>
+        <h3 class="text-sm font-medium text-gray-500 mb-2">Documento del curso</h3>
+        <app-document-viewer
+  [documentUrl]="cursoSeleccionado.rutaArchivo"
+></app-document-viewer>
+      </div>
+
+
+      <div class="flex justify-end mt-6 space-x-3">
+        <button
+          (click)="cerrarDetalleCurso()"
+          class="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300"
+        >
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div> -->
+
+
+
+
+
+
+
+
 </div>

@@ -21,6 +21,14 @@ export const routes: Routes = [
   { path: 'rh/buscar-empleado', component: BuscarEmpleadoComponent },
   { path: 'rh', component: RhNavegacionComponent },
   { path: 'empleado', component: EmpleadoNavegacionComponent },
+  {
+    path: 'empleado/actualizar-datos-empleado/:claveEmpleado',
+    component: ActualizarDatosEmpleadoComponent
+  },
+  {
+    path: 'empleado/actualizar-datos-empleado/:claveEmpleado',
+    component: ActualizarDatosEmpleadoComponent
+  },
 
 
   { path: '**', redirectTo: 'home' }

@@ -1,0 +1,6 @@
+<div *ngIf="documentUrl">
+  <iframe [src]="documentUrl" class="w-full h-96" frameborder="0"></iframe>
+</div>
+<div *ngIf="!documentUrl" class="text-gray-500 text-center">
+  No hay documento disponible
+</div>
