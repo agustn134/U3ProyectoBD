@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const actividadesControllers = require('../controllers/actividadesControllers');
-
-
 //Crear una actividad 
 router.post('/', actividadesControllers.crearActividad);
 //Ver Actividades
@@ -11,7 +9,5 @@ router.get('/', actividadesControllers.verActividades);
 router.put('/:id', actividadesControllers.actualizarActividad);
 //Ver cursos por id
 router.get('/:id', actividadesControllers.obtenerActividad);
-
-
 
 module.exports = router;

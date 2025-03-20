@@ -44,15 +44,31 @@ exports.actualizarActividad = async (req, res) => {
   }
 };
 
+// exports.obtenerActividad = async(req, res) => {
+//     console.log("ID encontrada!")
+//     let actividad = await Actividades.findOne({ _id: req.params.id });
+
+//     try {
+
+//     } catch (error) {
+//     console.log(error);
+//     res.status(500).send("Hubo un error al actualizar la actividad");
+//     }
+// }
+
+// Corrección para actividadesControllers.js
 exports.obtenerActividad = async(req, res) => {
-    console.log("ID encontrada!")
-    let actividad = await Actividades.findOne({ _id: req.params.id });
+  try {
+      console.log("ID encontrada:", req.params.id)
+      let actividad = await Actividades.findOne({ _id: req.params.id });
 
-    try {
-        
-    } catch (error) {
-    console.log(error);
-    res.status(500).send("Hubo un error al actualizar la actividad");
-    }
+      if(!actividad) {
+          return res.status(404).json({ msg: "La actividad no fue encontrada" });
+      }
+
+      res.json(actividad);
+  } catch (error) {
+      console.log(error);
+      res.status(500).send("Hubo un error al obtener la actividad");
+  }
 }
-
