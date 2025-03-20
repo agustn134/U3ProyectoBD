@@ -3,6 +3,7 @@ import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http'; // Para peticiones HTTP si usas servicios
 import { routes } from './app.routes';
 import { EmpleadoService } from './services/empleado.service';
+import { CursosService } from './services/cursos.service';
 
 
 export const appConfig: ApplicationConfig = {
@@ -10,7 +11,8 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes), // Habilita el enrutador
     provideHttpClient(),
-    EmpleadoService
+    EmpleadoService,
+    CursosService
   ]
 };
 

@@ -1,112 +1,328 @@
-import { Component } from '@angular/core';
-import { EmpleadoNavegacionComponent } from "../empleado-navegacion/empleado-navegacion.component";
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+// import { Component } from '@angular/core';
+// import { EmpleadoNavegacionComponent } from "../empleado-navegacion/empleado-navegacion.component";
+// import { FormsModule } from '@angular/forms';
+// import { CommonModule } from '@angular/common';
 
-@Component({
-  selector: 'app-cursos-empleado',
-  imports: [EmpleadoNavegacionComponent, FormsModule, CommonModule],
-  templateUrl: './cursos-empleado.component.html',
-  styleUrl: './cursos-empleado.component.css'
-})
+// @Component({
+//   selector: 'app-cursos-empleado',
+//   imports: [EmpleadoNavegacionComponent, FormsModule, CommonModule],
+//   templateUrl: './cursos-empleado.component.html',
+//   styleUrl: './cursos-empleado.component.css'
+// })
+// // export class CursosEmpleadoComponent {
+// //   mostrarFormularioCurso: boolean = false; // Controla la visibilidad del formulario de curso
+// //   cursos: any[] = []; // Lista de cursos
+// //   cursoForm: any = {}; // Datos del formulario de curso
+
+// //     // Función para abrir el formulario de curso
+// //     abrirFormularioCurso(): void {
+// //       this.mostrarFormularioCurso = true;
+// //     }
+
+// //     // Función para cerrar el formulario de curso
+// //     cerrarFormularioCurso(): void {
+// //       this.mostrarFormularioCurso = false;
+// //       this.cursoForm = {};
+// //     }
+
+// //     // Función para guardar un nuevo curso
+// //     guardarCurso(): void {
+// //       if (this.cursoForm.nombre && this.cursoForm.fechaInicio && this.cursoForm.fechaTermino) {
+// //         const nuevoCurso = {
+// //           nombre: this.cursoForm.nombre,
+// //           inicio: this.cursoForm.fechaInicio,
+// //           termino: this.cursoForm.fechaTermino,
+// //           empleadosInscritos: this.cursoForm.empleadosInscritos || []
+// //         };
+// //         this.cursos.push(nuevoCurso);
+// //         this.cerrarFormularioCurso();
+// //       }
+// //     }
+
+// //     // Función para agregar un curso con el boton
+// //     agregarCurso(index: number): void {
+
+// //       this.mostrarFormularioCurso = true;
+// //     }
+
+// // }
+
+
+
+
+
+// // import { Component } from '@angular/core';
+
+// // @Component({
+// //   selector: 'app-cursos-empleado',
+// //   templateUrl: './cursos-empleado.component.html',
+// //   styleUrls: ['./cursos-empleado.component.css']
+// // })
 // export class CursosEmpleadoComponent {
 //   mostrarFormularioCurso: boolean = false; // Controla la visibilidad del formulario de curso
 //   cursos: any[] = []; // Lista de cursos
 //   cursoForm: any = {}; // Datos del formulario de curso
 
-//     // Función para abrir el formulario de curso
-//     abrirFormularioCurso(): void {
-//       this.mostrarFormularioCurso = true;
+//   // Función para abrir el formulario de curso
+//   abrirFormularioCurso(): void {
+//     this.mostrarFormularioCurso = true;
+//   }
+
+//   // Función para cerrar el formulario de curso
+//   cerrarFormularioCurso(): void {
+//     this.mostrarFormularioCurso = false;
+//     this.cursoForm = {};
+//   }
+
+//   // Función para guardar un nuevo curso
+//   guardarCurso(): void {
+//     if (this.cursoForm.nombre && this.cursoForm.fechaInicio && this.cursoForm.fechaTermino) {
+//       const nuevoCurso = {
+//         nombre: this.cursoForm.nombre,
+//         inicio: this.cursoForm.fechaInicio,
+//         termino: this.cursoForm.fechaTermino,
+//         empleadosInscritos: this.cursoForm.empleadosInscritos || []
+//       };
+//       this.cursos.push(nuevoCurso);
+//       this.cerrarFormularioCurso();
 //     }
+//   }
 
-//     // Función para cerrar el formulario de curso
-//     cerrarFormularioCurso(): void {
-//       this.mostrarFormularioCurso = false;
-//       this.cursoForm = {};
+//   // Función para editar un curso
+//   editarCurso(index: number): void {
+//     const curso = this.cursos[index];
+//     this.cursoForm = { ...curso }; // Copia el curso seleccionado al formulario
+//     this.abrirFormularioCurso(); // Abre el formulario
+//   }
+
+//   // Función para actualizar un curso existente
+//   actualizarCurso(index: number): void {
+//     if (this.cursoForm.nombre && this.cursoForm.fechaInicio && this.cursoForm.fechaTermino) {
+//       this.cursos[index] = { ...this.cursoForm }; // Actualiza el curso en la lista
+//       this.cerrarFormularioCurso(); // Cierra el formulario
 //     }
+//   }
 
-//     // Función para guardar un nuevo curso
-//     guardarCurso(): void {
-//       if (this.cursoForm.nombre && this.cursoForm.fechaInicio && this.cursoForm.fechaTermino) {
-//         const nuevoCurso = {
-//           nombre: this.cursoForm.nombre,
-//           inicio: this.cursoForm.fechaInicio,
-//           termino: this.cursoForm.fechaTermino,
-//           empleadosInscritos: this.cursoForm.empleadosInscritos || []
-//         };
-//         this.cursos.push(nuevoCurso);
-//         this.cerrarFormularioCurso();
-//       }
+//   // Función para eliminar un curso
+//   eliminarCurso(index: number): void {
+//     if (confirm('¿Estás seguro de eliminar este curso?')) {
+//       this.cursos.splice(index, 1); // Elimina el curso de la lista
 //     }
-
-//     // Función para agregar un curso con el boton
-//     agregarCurso(index: number): void {
-
-//       this.mostrarFormularioCurso = true;
-//     }
-
+//   }
 // }
 
 
 
 
 
-// import { Component } from '@angular/core';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import { Component, OnInit } from '@angular/core';
+// import { EmpleadoNavegacionComponent } from "../empleado-navegacion/empleado-navegacion.component";
+// import { FormsModule } from '@angular/forms';
+// import { CommonModule } from '@angular/common';
+// import { CursosService } from '../../services/cursos.service';
 
 // @Component({
 //   selector: 'app-cursos-empleado',
+//   standalone: true,
+//   imports: [EmpleadoNavegacionComponent, FormsModule, CommonModule],
 //   templateUrl: './cursos-empleado.component.html',
-//   styleUrls: ['./cursos-empleado.component.css']
+//   styleUrl: './cursos-empleado.component.css'
 // })
-export class CursosEmpleadoComponent {
-  mostrarFormularioCurso: boolean = false; // Controla la visibilidad del formulario de curso
-  cursos: any[] = []; // Lista de cursos
-  cursoForm: any = {}; // Datos del formulario de curso
+// export class CursosEmpleadoComponent implements OnInit {
+//   mostrarFormularioCurso: boolean = false;
+//   cursos: any[] = [];
+//   cursoForm: any = {
+//     nombre: '',
+//     fechaInicio: '',
+//     fechaTermino: ''
+//   };
 
-  // Función para abrir el formulario de curso
+//   constructor(private cursosService: CursosService) {}
+
+//   ngOnInit(): void {
+//     this.cargarCursos();
+//   }
+
+//   cargarCursos(): void {
+//     this.cursosService.obtenerCursos().subscribe({
+//       next: (data) => {
+//         // Transformar los datos recibidos al formato que espera la tabla
+//         this.cursos = data.map((curso: any) => ({
+//           nombre: curso.nombreCurso,
+//           inicio: new Date(curso.fechaInicio).toLocaleDateString(),
+//           termino: new Date(curso.fechaTermino).toLocaleDateString()
+//         }));
+//       },
+//       error: (error) => {
+//         console.error('Error al cargar los cursos:', error);
+//       }
+//     });
+//   }
+
+//   abrirFormularioCurso(): void {
+//     this.mostrarFormularioCurso = true;
+//   }
+
+//   cerrarFormularioCurso(): void {
+//     this.mostrarFormularioCurso = false;
+//     this.cursoForm = {
+//       nombre: '',
+//       fechaInicio: '',
+//       fechaTermino: ''
+//     };
+//   }
+
+//   guardarCurso(): void {
+//     if (this.cursoForm.nombre && this.cursoForm.fechaInicio && this.cursoForm.fechaTermino) {
+//       // Crear el objeto con el formato que espera el backend
+//       const nuevoCurso = {
+//         nombreEmpleado: 'Nombre del Empleado', // Esto debe ser dinámico o según tu lógica de negocio
+//         nombreCurso: this.cursoForm.nombre,
+//         fechaInicio: this.cursoForm.fechaInicio,
+//         fechaTermino: this.cursoForm.fechaTermino,
+//         documentoEntregado: {
+//           tipoDocumento: 'Constancia', // Valor por defecto o según tu lógica
+//           rutaArchivo: 'ruta/por/defecto' // Valor por defecto o según tu lógica
+//         }
+//       };
+
+//       this.cursosService.crearCurso(nuevoCurso).subscribe({
+//         next: (response) => {
+//           console.log('Curso guardado con éxito:', response);
+//           this.cargarCursos(); // Recargar la lista después de guardar
+//           this.cerrarFormularioCurso();
+//         },
+//         error: (error) => {
+//           console.error('Error al guardar el curso:', error);
+//         }
+//       });
+//     }
+//   }
+// }
+
+import { Component, OnInit } from '@angular/core';
+import { EmpleadoNavegacionComponent } from "../empleado-navegacion/empleado-navegacion.component";
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { CursosService } from '../../services/cursos.service';
+
+@Component({
+  selector: 'app-cursos-empleado',
+  standalone: true,
+  imports: [EmpleadoNavegacionComponent, FormsModule, CommonModule],
+  templateUrl: './cursos-empleado.component.html',
+  styleUrl: './cursos-empleado.component.css'
+})
+export class CursosEmpleadoComponent implements OnInit {
+  mostrarFormularioCurso: boolean = false;
+  cursos: any[] = [];
+  cursoForm: any = {
+    nombre: '',
+    fechaInicio: '',
+    fechaTermino: '',
+    tipoDocumento: 'Constancia', // Valor por defecto
+    rutaArchivo: '' // Este campo podría requerir un input file en el HTML
+  };
+
+  // Array de opciones para el tipo de documento
+  tiposDocumento: string[] = ['Constancia', 'Título', 'Diploma'];
+
+  constructor(private cursosService: CursosService) {}
+
+  ngOnInit(): void {
+    this.cargarCursos();
+  }
+
+  cargarCursos(): void {
+    this.cursosService.obtenerCursos().subscribe({
+      next: (data) => {
+        console.log('Cursos obtenidos:', data);
+        this.cursos = data.map((curso: any) => ({
+          id: curso._id, // Guardar el ID para operaciones futuras
+          nombre: curso.nombreCurso,
+          inicio: new Date(curso.fechaInicio).toLocaleDateString(),
+          termino: new Date(curso.fechaTermino).toLocaleDateString(),
+          tipoDocumento: curso.documentoEntregado?.tipoDocumento,
+          rutaArchivo: curso.documentoEntregado?.rutaArchivo
+        }));
+      },
+      error: (error) => {
+        console.error('Error al cargar los cursos:', error);
+      }
+    });
+  }
+
   abrirFormularioCurso(): void {
     this.mostrarFormularioCurso = true;
+    // Resetear el formulario
+    this.cursoForm = {
+      nombre: '',
+      fechaInicio: '',
+      fechaTermino: '',
+      tipoDocumento: 'Constancia',
+      rutaArchivo: ''
+    };
   }
 
-  // Función para cerrar el formulario de curso
   cerrarFormularioCurso(): void {
     this.mostrarFormularioCurso = false;
-    this.cursoForm = {};
   }
 
-  // Función para guardar un nuevo curso
   guardarCurso(): void {
-    if (this.cursoForm.nombre && this.cursoForm.fechaInicio && this.cursoForm.fechaTermino) {
+    if (this.cursoForm.nombre && this.cursoForm.fechaInicio && this.cursoForm.fechaTermino &&
+        this.cursoForm.tipoDocumento && this.cursoForm.rutaArchivo) {
+
+      // Crear el objeto con el formato que espera el backend
       const nuevoCurso = {
-        nombre: this.cursoForm.nombre,
-        inicio: this.cursoForm.fechaInicio,
-        termino: this.cursoForm.fechaTermino,
-        empleadosInscritos: this.cursoForm.empleadosInscritos || []
+        nombreEmpleado: 'Nombre del Empleado Actual', // Esto debería obtenerse dinámicamente
+        nombreCurso: this.cursoForm.nombre,
+        fechaInicio: this.cursoForm.fechaInicio,
+        fechaTermino: this.cursoForm.fechaTermino,
+        documentoEntregado: {
+          tipoDocumento: this.cursoForm.tipoDocumento,
+          rutaArchivo: this.cursoForm.rutaArchivo
+        }
       };
-      this.cursos.push(nuevoCurso);
-      this.cerrarFormularioCurso();
-    }
-  }
 
-  // Función para editar un curso
-  editarCurso(index: number): void {
-    const curso = this.cursos[index];
-    this.cursoForm = { ...curso }; // Copia el curso seleccionado al formulario
-    this.abrirFormularioCurso(); // Abre el formulario
-  }
+      console.log('Enviando curso:', nuevoCurso);
 
-  // Función para actualizar un curso existente
-  actualizarCurso(index: number): void {
-    if (this.cursoForm.nombre && this.cursoForm.fechaInicio && this.cursoForm.fechaTermino) {
-      this.cursos[index] = { ...this.cursoForm }; // Actualiza el curso en la lista
-      this.cerrarFormularioCurso(); // Cierra el formulario
-    }
-  }
-
-  // Función para eliminar un curso
-  eliminarCurso(index: number): void {
-    if (confirm('¿Estás seguro de eliminar este curso?')) {
-      this.cursos.splice(index, 1); // Elimina el curso de la lista
+      this.cursosService.crearCurso(nuevoCurso).subscribe({
+        next: (response) => {
+          console.log('Curso guardado con éxito:', response);
+          this.cargarCursos(); // Recargar la lista después de guardar
+          this.cerrarFormularioCurso();
+        },
+        error: (error) => {
+          console.error('Error al guardar el curso:', error);
+          alert('Error al guardar el curso. Por favor, intenta de nuevo.');
+        }
+      });
+    } else {
+      alert('Por favor, completa todos los campos requeridos.');
     }
   }
 }
+
+

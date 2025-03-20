@@ -1,13 +1,13 @@
 <div class="flex min-h-screen">
   <div class="flex min-h-screen">
     <!-- Barra de navegación -->
-    <app-rh-navegacion class="w-64 flex-shrink-0"></app-rh-navegacion>
-  
+    <app-empleado-navegacion class="w-64 flex-shrink-0"></app-empleado-navegacion>
+
     <!-- Contenido principal -->
     <div class="flex-1 p-6 bg-gray-50">
       <div class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-md">
         <h2 class="text-2xl font-bold mb-6 text-gray-800">Actividades del Empleado</h2>
-  
+
         <!-- Tabla de actividades -->
         <div class="overflow-x-auto">
           <table class="min-w-full bg-white border">
@@ -46,7 +46,7 @@
                   </td>
                 </tr>
               }
-              
+
               <!-- Mensaje si no hay actividades -->
               @if (actividades.length === 0) {
                 <tr>

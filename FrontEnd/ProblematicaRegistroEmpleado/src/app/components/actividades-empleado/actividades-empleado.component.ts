@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RhNavegacionComponent } from '../rh-navegacion/rh-navegacion.component';
+import { EmpleadoNavegacionComponent } from "../empleado-navegacion/empleado-navegacion.component";
 
 interface Actividad {
   descripcion: string;
@@ -16,7 +16,7 @@ interface Actividad {
   // Definiendo el componente como standalone
   standalone: true,
   // Importando los módulos y componentes necesarios
-  imports: [CommonModule, FormsModule, RhNavegacionComponent]
+  imports: [CommonModule, FormsModule, EmpleadoNavegacionComponent]
 })
 export class ActividadesEmpleadoComponent implements OnInit {
   actividades: Actividad[] = [];
