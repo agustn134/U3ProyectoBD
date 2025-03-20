@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
-import { PantallaBuscarComponent } from './components/pantalla-buscar/pantalla-buscar.component';
 import { ActividadesEmpleadoComponent } from './components/actividades-empleado/actividades-empleado.component';
 import { ActualizarDatosEmpleadoComponent } from './components/actualizar-datos-empleado/actualizar-datos-empleado.component';
 import { CursosEmpleadoComponent } from './components/cursos-empleado/cursos-empleado.component';
@@ -17,7 +16,6 @@ export const routes: Routes = [
   { path: 'empleado/actualizar-datos-empleado', component: ActualizarDatosEmpleadoComponent },
   { path: 'empleado/cursos-empleado', component: CursosEmpleadoComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'rh/pantalla-buscar', component: PantallaBuscarComponent },
   { path: 'empleado/buscar-curso', component: PantallaDeCursosComponent },
   { path: 'rh/registrar-empleado', component: RegistrarEmpleadoComponent },
   { path: 'rh/buscar-empleado', component: BuscarEmpleadoComponent },
