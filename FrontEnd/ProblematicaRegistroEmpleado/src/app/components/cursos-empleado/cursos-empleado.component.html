@@ -336,13 +336,11 @@
 
 
 
-<div class="flex min-h-screen">
-  <!-- Barra de navegación -->
-  <app-empleado-navegacion class="w-64 flex-shrink-0"></app-empleado-navegacion>
+<!-- <div class="flex min-h-screen">
+   <app-empleado-navegacion class="w-64 flex-shrink-0"></app-empleado-navegacion>
   <div class="flex-1 p-6 bg-gray-50">
 
-    <!-- Botón para Agregar Curso -->
-    <div class="flex justify-end mb-4">
+     <div class="flex justify-end mb-4">
       <button
         (click)="abrirFormularioCurso()"
         class="px-4 py-2 bg-yellow-500 text-black rounded-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500"
@@ -351,8 +349,7 @@
       </button>
     </div>
 
-    <!-- Lista de Cursos (modificación) -->
-    <div class="overflow-x-auto">
+     <div class="overflow-x-auto">
       <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Ver Cursos</h2>
       <table class="w-full text-sm text-left text-gray-500">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50">
@@ -361,8 +358,7 @@
             <th scope="col" class="px-6 py-3">Fecha de Inicio</th>
             <th scope="col" class="px-6 py-3">Fecha de Término</th>
             <th scope="col" class="px-6 py-3">Tipo de Documento</th>
-            <!-- <th scope="col" class="px-6 py-3">Acciones</th>  -->
-          </tr>
+           </tr>
         </thead>
         <tbody>
           @for (curso of cursos; track $index) {
@@ -370,7 +366,7 @@
               <td class="px-6 py-4">{{ curso.nombre }}</td>
               <td class="px-6 py-4">{{ curso.inicio }}</td>
               <td class="px-6 py-4">{{ curso.termino }}</td>
-              <td class="px-6 py-4">{{ curso.tipoDocumento }}</td>
+              <td class="px-6 py-4">{{ curso.tipoDocumento }}</td> -->
               <!-- <td class="px-6 py-4">
                 <button
                   (click)="abrirDetalleCurso(curso)"
@@ -379,7 +375,7 @@
                   Ver detalles
                 </button>
               </td> -->
-            </tr>
+            <!-- </tr>
           }
           <tr *ngIf="cursos.length === 0">
             <td colspan="5" class="px-6 py-4 text-center text-gray-500">No hay cursos disponibles</td>
@@ -388,8 +384,7 @@
       </table>
     </div>
 
-    <!-- Modificación del formulario de curso -->
-    <div *ngIf="mostrarFormularioCurso" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+     <div *ngIf="mostrarFormularioCurso" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
       <div class="bg-white w-full max-w-2xl p-6 rounded-lg shadow-md relative">
         <span (click)="cerrarFormularioCurso()" class="absolute top-2 right-2 text-2xl cursor-pointer">&times;</span>
         <h3 class="text-xl font-bold text-gray-800 mb-4">Registrar Nuevo Curso</h3>
@@ -440,7 +435,6 @@
             </select>
           </div>
 
-          <!-- Reemplazar el campo de texto de ruta de archivo por el componente de carga -->
           <div class="form-group mb-6">
             <label class="block text-sm font-medium text-gray-700 mb-2">Documento del Curso:</label>
             <app-file-upload
@@ -469,7 +463,6 @@
             </button>
           </div>
 
-          <!-- Mensajes de alerta -->
           <div *ngIf="errorMensaje" class="mt-4 p-3 bg-red-100 text-red-700 rounded-md">
             {{ errorMensaje }}
           </div>
@@ -477,7 +470,7 @@
       </div>
     </div>
 
-  </div>
+  </div> -->
 
   <!-- Boton para ver detalles del curso -->
   <!-- <div *ngIf="cursoSeleccionado" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
@@ -538,4 +531,247 @@
 
 
 
+<!-- </div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="flex min-h-screen">
+  <!-- Barra de navegación -->
+  <app-empleado-navegacion class="w-64 flex-shrink-0"></app-empleado-navegacion>
+
+  <div class="flex-1 p-6 bg-slate-50">
+    <div class="max-w-6xl mx-auto">
+      <!-- Cabecera y botón de acción -->
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
+        <div>
+          <h1 class="text-2xl font-bold text-slate-800">Mis Cursos y Capacitaciones</h1>
+          <p class="text-sm text-slate-500">Gestione sus certificaciones y cursos completados</p>
+        </div>
+
+        <button (click)="abrirFormularioCurso()"
+          class="mt-3 sm:mt-0 inline-flex items-center px-4 py-2.5 bg-sky-600 text-white rounded-lg hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 transition-colors shadow-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+          </svg>
+          Agregar Nuevo Curso
+        </button>
+      </div>
+
+      <!-- Tarjeta principal con tabla de cursos -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="px-6 py-4 bg-gradient-to-r from-slate-700 to-slate-800 flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13c-1.168-.776-2.754-1.253-4.5-1.253-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+          <h2 class="text-lg font-semibold text-white">Cursos Registrados</h2>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm text-left">
+            <thead class="text-xs font-medium text-slate-700 uppercase bg-slate-100 border-b border-slate-200">
+              <tr>
+                <th scope="col" class="px-6 py-3">Nombre del Curso</th>
+                <th scope="col" class="px-6 py-3">Fecha de Inicio</th>
+                <th scope="col" class="px-6 py-3">Fecha de Término</th>
+                <th scope="col" class="px-6 py-3">Tipo de Documento</th>
+                <th scope="col" class="px-6 py-3 text-right">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (curso of cursos; track $index) {
+                <tr class="border-b border-slate-200 hover:bg-slate-50 transition-colors">
+                  <td class="px-6 py-4 font-medium text-slate-700">{{ curso.nombre }}</td>
+                  <td class="px-6 py-4">{{ curso.inicio }}</td>
+                  <td class="px-6 py-4">{{ curso.termino }}</td>
+                  <td class="px-6 py-4">
+                    <span [class]="'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ' +
+                      (curso.tipoDocumento === 'Constancia' ? 'bg-blue-100 text-blue-800' :
+                       curso.tipoDocumento === 'Título' ? 'bg-purple-100 text-purple-800' :
+                       'bg-green-100 text-green-800')">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                      </svg>
+                      {{ curso.tipoDocumento }}
+                    </span>
+                  </td>
+                  <td class="px-6 py-4 text-right">
+                    <button *ngIf="curso.rutaArchivo"
+                      class="inline-flex items-center px-2.5 py-1.5 text-xs font-medium rounded text-sky-700 bg-sky-100 hover:bg-sky-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 transition-colors">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                      </svg>
+                      Ver documento
+                    </button>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+
+          <!-- Estado vacío -->
+          <div *ngIf="cursos.length === 0" class="p-8 text-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-slate-300 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13c-1.168-.776-2.754-1.253-4.5-1.253-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+            <p class="text-slate-500 mb-1">No hay cursos registrados</p>
+            <p class="text-sm text-slate-400">Agregue un nuevo curso para comenzar a construir su historial de capacitación</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Información adicional -->
+      <div class="mt-6 bg-sky-50 border border-sky-200 rounded-lg p-4 flex items-start">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-sky-500 mt-0.5 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <div>
+          <p class="text-sky-800 text-sm">Los cursos y capacitaciones que registre se mostrarán en su perfil profesional y serán accesibles para el área de Recursos Humanos. Asegúrese de subir documentos oficiales que acrediten su participación.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para Registrar Nuevo Curso -->
+  <div *ngIf="mostrarFormularioCurso" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900 bg-opacity-50 backdrop-blur-sm">
+    <div class="bg-white w-full max-w-2xl rounded-lg shadow-xl animate-fadeIn overflow-hidden">
+      <!-- Cabecera del modal -->
+      <div class="bg-gradient-to-r from-slate-700 to-slate-800 px-6 py-4 flex justify-between items-center">
+        <h3 class="text-lg font-semibold text-white flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13c-1.168-.776-2.754-1.253-4.5-1.253-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+          Registrar Nuevo Curso
+        </h3>
+        <button (click)="cerrarFormularioCurso()" class="text-slate-300 hover:text-white focus:outline-none">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="p-6">
+        <form (ngSubmit)="guardarCurso()">
+          <!-- Nombre del curso -->
+          <div class="mb-4">
+            <label for="nombreCurso" class="block text-sm font-medium text-slate-700 mb-1">Nombre del Curso</label>
+            <input type="text" id="nombreCurso" [(ngModel)]="cursoForm.nombre" name="nombreCurso" required
+              class="block w-full px-3 py-2 border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent"
+              placeholder="Ej. Desarrollo de Habilidades Gerenciales">
+          </div>
+
+          <!-- Fechas (en grid) -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div>
+              <label for="fechaInicio" class="block text-sm font-medium text-slate-700 mb-1">Fecha de Inicio</label>
+              <input type="date" id="fechaInicio" [(ngModel)]="cursoForm.fechaInicio" name="fechaInicio" required
+                class="block w-full px-3 py-2 border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent">
+            </div>
+
+            <div>
+              <label for="fechaTermino" class="block text-sm font-medium text-slate-700 mb-1">Fecha de Término</label>
+              <input type="date" id="fechaTermino" [(ngModel)]="cursoForm.fechaTermino" name="fechaTermino" required
+                class="block w-full px-3 py-2 border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent">
+            </div>
+          </div>
+
+          <!-- Tipo de documento -->
+          <div class="mb-5">
+            <label for="tipoDocumento" class="block text-sm font-medium text-slate-700 mb-1">Tipo de Documento</label>
+            <div class="relative">
+              <select id="tipoDocumento" [(ngModel)]="cursoForm.tipoDocumento" name="tipoDocumento" required
+                class="block w-full px-3 py-2 border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent appearance-none pr-8">
+                <option *ngFor="let tipo of tiposDocumento" [value]="tipo">{{ tipo }}</option>
+              </select>
+              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-700">
+                <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Componente de carga de archivo -->
+          <div class="mb-6 bg-slate-50 p-4 rounded-lg border border-slate-200">
+            <label class="block text-sm font-medium text-slate-700 mb-2 flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              Documento del Curso
+            </label>
+
+            <app-file-upload
+              [tipoDocumento]="'cursos'"
+              [accept]="'.pdf,.doc,.docx'"
+              [allowedFileTypes]="'Archivos permitidos: PDF, Word'"
+              (fileUploaded)="onFileUploaded($event)"
+            ></app-file-upload>
+          </div>
+
+          <!-- Mensajes de error -->
+          <div *ngIf="errorMensaje" class="mb-4 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 rounded-md flex items-start">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            <span>{{ errorMensaje }}</span>
+          </div>
+
+          <!-- Botones de acción -->
+          <div class="flex justify-end space-x-3 pt-4">
+            <button type="button" (click)="cerrarFormularioCurso()"
+              class="px-4 py-2 bg-slate-100 text-slate-800 rounded-md hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-slate-500 transition-colors flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+              Cancelar
+            </button>
+
+            <button type="submit" [disabled]="uploading || !cursoForm.rutaArchivo"
+              [class]="'px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 transition-colors flex items-center ' +
+                (uploading || !cursoForm.rutaArchivo ? 'bg-sky-300 text-white cursor-not-allowed' : 'bg-sky-600 text-white hover:bg-sky-700')">
+              <span *ngIf="!uploading" class="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+                </svg>
+                Guardar Curso
+              </span>
+              <span *ngIf="uploading" class="flex items-center">
+                <svg class="animate-spin h-5 w-5 mr-1 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Subiendo...
+              </span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeIn {
+      animation: fadeIn 0.2s ease-out forwards;
+    }
+  </style>
 </div>
