@@ -499,8 +499,7 @@ export class BuscarEmpleadoComponent implements OnInit {
   //     };
   //     this.actividades.push(nuevaActividad);
   //     this.cerrarFormularioActividad();
-  //   }
-  // }
+
   guardarActividad(): void {
     if (
       this.actividadForm.nombre &&

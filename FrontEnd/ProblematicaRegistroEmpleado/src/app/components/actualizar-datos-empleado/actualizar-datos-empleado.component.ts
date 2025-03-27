@@ -45,7 +45,7 @@ export class ActualizarDatosEmpleadoComponent  {
 
   // Datos personales editables
   sexo: string = '';
-
+  fotoUrl: string = '';
   // Datos de domicilio
   calle: string = '';
   numeroInterior: string = '';
@@ -145,6 +145,7 @@ export class ActualizarDatosEmpleadoComponent  {
     const empleadoActualizado = {
       ...this.empleadoOriginal,
       sexo: this.sexo,
+      foto: this.fotoUrl, // Guardar la nueva URL de la foto
       domicilio: {
         calle: this.calle,
         numeroInterior: this.numeroInterior,
