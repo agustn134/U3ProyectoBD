@@ -1,16 +1,16 @@
 const Actividades = require('../models/Actividades');
 
 exports.crearActividad = async (req, res) => {
-    try {
-        let actividad;
-        actividad = new Actividades(req.body);
-        await actividad.save();
-        res.send(actividad);
-    } catch (error) {
-        console.log(error);
-        res.status(500).send('Hubo un error al realizar la operación!');
-    }
+  try {
+      let actividad = new Actividades(req.body);
+      await actividad.save();
+      res.status(201).json({ mensaje: "Actividad registrada con éxito", actividad });
+  } catch (error) {
+      console.error("Error al registrar actividad:", error.message, error);
+      res.status(500).json({ mensaje: "Hubo un error al realizar la operación", error: error.message });
+  }
 };
+
 
 exports.verActividades = async(req, res)=>{
     try {
