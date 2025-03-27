@@ -128,7 +128,7 @@
 //     const month = (date.getMonth() + 1).toString().padStart(2, '0');
 //     const day = date.getDate().toString().padStart(2, '0');
 
-//     this.rfc = `${inicialApellidoPaterno}${inicialApellidoMaterno}${inicialNombre}${year}${month}${day}`;
+//     this.rfc = ${inicialApellidoPaterno}${inicialApellidoMaterno}${inicialNombre}${year}${month}${day};
 
 //     // Llama a la función para generar la clave del empleado
 //     this.generarClaveEmpleado();
@@ -146,7 +146,7 @@
 //     const inicialApellidoMaterno = this.apellidoMaterno.charAt(0).toUpperCase();
 //     const consecutivo = this.consecutivoActual.toString().padStart(3, '0');
 
-//     this.claveEmpleado = `${inicialNombre}${inicialApellidoPaterno}${inicialApellidoMaterno}-${consecutivo}`;
+//     this.claveEmpleado = ${inicialNombre}${inicialApellidoPaterno}${inicialApellidoMaterno}-${consecutivo};
 //   }
 
 //   // Agregar o eliminar elementos dinámicos
@@ -394,29 +394,22 @@ export class RegistrarEmpleadoComponent implements OnInit {
       this.rfc = '';
       return;
     }
-  
+
     const inicialNombre = this.nombre.charAt(0).toUpperCase();
     const inicialApellidoPaterno = this.apellidoPaterno.charAt(0).toUpperCase();
     const inicialApellidoMaterno = this.apellidoMaterno.charAt(0).toUpperCase();
-  
-    const [year, month, day] = this.fechaNacimiento.split('-');
-    
-    if (!year || !month || !day) {
+
+    const date = new Date(this.fechaNacimiento);
+    if (isNaN(date.getTime())) {
       this.rfc = '';
       return;
     }
-<<<<<<< HEAD
-  
-    const shortYear = year.slice(-2);
-    this.rfc = `${inicialApellidoPaterno}${inicialApellidoMaterno}${inicialNombre}${shortYear}${month}${day}`;
-=======
 
     const year = date.getFullYear().toString().slice(-2);
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const day = date.getDate().toString().padStart(2, '0');
 
     this.rfc = `${inicialApellidoPaterno}${inicialApellidoMaterno}${inicialNombre}${year}${month}${day}`;
->>>>>>> 09f7b3a2a501823974dabbcf75e35c4f23965179
     this.generarClaveEmpleado();
   }
 
