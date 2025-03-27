@@ -742,8 +742,6 @@ import { DomSanitizer } from '@angular/platform-browser';
     EmpleadoNavegacionComponent,
     FormsModule,
     CommonModule,
-    FileUploadComponent,
-    // DocumentViewerComponent
   ],
   templateUrl: './cursos-empleado.component.html',
   styleUrl: './cursos-empleado.component.css'
@@ -775,106 +773,6 @@ export class CursosEmpleadoComponent implements OnInit {
     this.cargarCursos();
   }
 
-  // cargarCursos(): void {
-  //   this.cursosService.obtenerCursos().subscribe({
-  //     next: (data) => {
-  //       console.log('Cursos obtenidos:', data);
-  //       // this.cursos = data.map((curso: any) => ({
-  //       //   id: curso._id,
-  //       //   nombre: curso.nombreCurso,
-  //       //   inicio: new Date(curso.fechaInicio).toLocaleDateString(),
-  //       //   termino: new Date(curso.fechaTermino).toLocaleDateString(),
-  //       //   empleado: curso.nombreEmpleado,
-  //       //   tipoDocumento: curso.documentoEntregado?.tipoDocumento,
-  //       //   rutaArchivo: curso.documentoEntregado?.rutaArchivo
-  //       // }));
-  //       this.cursos = data.map((curso: any) => ({
-  //         id: curso._id,
-  //         nombre: curso.nombreCurso,
-  //         inicio: new Date(curso.fechaInicio).toLocaleDateString(),
-  //         termino: new Date(curso.fechaTermino).toLocaleDateString(),
-  //         empleado: curso.nombreEmpleado,
-  //         tipoDocumento: curso.documentoEntregado?.tipoDocumento,
-  //         rutaArchivo: curso.documentoEntregado?.rutaArchivo
-  //           ? `http://localhost:5000/${curso.documentoEntregado.rutaArchivo}`
-  //           : '' // Asegúrate de convertir a URL completa si es necesario
-  //       }));
-  //     },
-  //     error: (error) => {
-  //       console.error('Error al cargar los cursos:', error);
-  //       this.errorMensaje = 'Error al cargar los cursos. Por favor, intenta nuevamente.';
-  //     }
-  //   });
-  // }
-
-
-  // cargarCursos(): void {
-  //   this.cursosService.obtenerCursos().subscribe({
-  //     next: (data) => {
-  //       console.log('Cursos obtenidos:', data);
-  //       this.cursos = data.map((curso: any) => ({
-  //         id: curso._id,
-  //         nombre: curso.nombreCurso,
-  //         inicio: new Date(curso.fechaInicio).toLocaleDateString(),
-  //         termino: new Date(curso.fechaTermino).toLocaleDateString(),
-  //         empleado: curso.nombreEmpleado,
-  //         tipoDocumento: curso.documentoEntregado?.tipoDocumento,
-  //         rutaArchivo: curso.documentoEntregado?.rutaArchivo || '' // Usa la ruta relativa
-  //       }));
-  //     },
-  //     error: (error) => {
-  //       console.error('Error al cargar los cursos:', error);
-  //       this.errorMensaje = 'Error al cargar los cursos. Por favor, intenta nuevamente.';
-  //     }
-  //   });
-  // }
-
-  // cargarCursos(): void {
-  //   this.cursosService.obtenerCursos().subscribe({
-  //     next: (data) => {
-  //       console.log('Cursos obtenidos:', data);
-  //       this.cursos = data.map((curso: any) => ({
-  //         id: curso._id,
-  //         nombre: curso.nombreCurso,
-  //         inicio: new Date(curso.fechaInicio).toLocaleDateString(),
-  //         termino: new Date(curso.fechaTermino).toLocaleDateString(),
-  //         empleado: curso.nombreEmpleado,
-  //         tipoDocumento: curso.documentoEntregado?.tipoDocumento,
-  //         rutaArchivo: curso.documentoEntregado?.rutaArchivo
-  //           ? `/uploads/cursos/${curso.documentoEntregado.rutaArchivo}`
-  //           : '' // Ruta específica para cursos
-  //       }));
-  //     },
-  //     error: (error) => {
-  //       console.error('Error al cargar los cursos:', error);
-  //       this.errorMensaje = 'Error al cargar los cursos. Por favor, intenta nuevamente.';
-  //     }
-  //   });
-  // }
-
-
-  // cargarCursos(): void {
-  //   this.cursosService.obtenerCursos().subscribe({
-  //     next: (data) => {
-  //       console.log('Cursos obtenidos:', data);
-  //       this.cursos = data.map((curso: any) => ({
-  //         id: curso._id,
-  //         nombre: curso.nombreCurso,
-  //         inicio: new Date(curso.fechaInicio).toLocaleDateString(),
-  //         termino: new Date(curso.fechaTermino).toLocaleDateString(),
-  //         empleado: curso.nombreEmpleado,
-  //         tipoDocumento: curso.documentoEntregado?.tipoDocumento,
-  //         rutaArchivo: curso.documentoEntregado?.rutaArchivo
-  //           ? `/uploads/${curso.documentoEntregado.rutaArchivo}`
-  //           : '' // Usa la ruta relativa con /uploads
-  //       }));
-  //     },
-  //     error: (error) => {
-  //       console.error('Error al cargar los cursos:', error);
-  //       this.errorMensaje = 'Error al cargar los cursos. Por favor, intenta nuevamente.';
-  //     }
-  //   });
-  // }
 
   cargarCursos(): void {
     this.cursosService.obtenerCursos().subscribe({
@@ -917,27 +815,9 @@ export class CursosEmpleadoComponent implements OnInit {
     this.mostrarFormularioCurso = false;
   }
 
-  // Método para manejar el evento de archivo subido
-  onFileUploaded(fileInfo: {url: string, filename: string}): void {
-    console.log('Archivo subido:', fileInfo);
-    this.cursoForm.rutaArchivo = fileInfo.url;
-  }
 
-  // guardarCurso(): void {
-  //   if (this.cursoForm.nombre && this.cursoForm.fechaInicio && this.cursoForm.fechaTermino &&
-  //       this.cursoForm.tipoDocumento && this.cursoForm.rutaArchivo) {
 
-  //     // Crear el objeto con el formato que espera el backend
-  //     const nuevoCurso = {
-  //       nombreEmpleado: 'Nombre del Empleado Actual', // Esto debería obtenerse dinámicamente
-  //       nombreCurso: this.cursoForm.nombre,
-  //       fechaInicio: this.cursoForm.fechaInicio,
-  //       fechaTermino: this.cursoForm.fechaTermino,
-  //       documentoEntregado: {
-  //         tipoDocumento: this.cursoForm.tipoDocumento,
-  //         rutaArchivo: this.cursoForm.rutaArchivo
-  //       }
-  //     };
+
 
   guardarCurso(): void {
     if (this.cursoForm.nombre && this.cursoForm.fechaInicio && this.cursoForm.fechaTermino &&
@@ -975,12 +855,41 @@ export class CursosEmpleadoComponent implements OnInit {
     }
   }
 
-  // Métodos para la vista detallada de un curso
-  abrirDetalleCurso(curso: any): void {
-    this.cursoSeleccionado = curso;
-  }
 
-  cerrarDetalleCurso(): void {
-    this.cursoSeleccionado = null;
-  }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

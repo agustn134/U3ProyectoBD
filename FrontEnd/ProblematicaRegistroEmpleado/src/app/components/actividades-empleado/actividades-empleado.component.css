@@ -5,7 +5,7 @@ body {
     margin: 0;
     padding: 0;
   }
-  
+
   .container {
     width: 80%;
     margin: 20px auto;
@@ -13,33 +13,33 @@ body {
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
-  
+
   h1 {
     text-align: center;
     color: #333;
   }
-  
+
   table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
   }
-  
+
   th, td {
     padding: 12px;
     text-align: left;
     border-bottom: 1px solid #ddd;
   }
-  
+
   th {
     background-color: #007bff;
     color: white;
   }
-  
+
   tr:hover {
     background-color: #f1f1f1;
   }
-  
+
   button {
     background-color: #007bff;
     color: white;
@@ -48,11 +48,11 @@ body {
     cursor: pointer;
     border-radius: 4px;
   }
-  
+
   button:hover {
     background-color: #0056b3;
   }
-  
+
   /* Estilos del Modal */
   .modal {
     display: none;
@@ -65,7 +65,7 @@ body {
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.5);
   }
-  
+
   .modal-content {
     background-color: #fff;
     margin: 10% auto;
@@ -74,7 +74,7 @@ body {
     width: 50%;
     border-radius: 8px;
   }
-  
+
   .close {
     color: #aaa;
     float: right;
@@ -82,7 +82,14 @@ body {
     font-weight: bold;
     cursor: pointer;
   }
-  
+
   .close:hover {
     color: #000;
   }
+
+
+
+  /* En el archivo styles.css global */
+.seccion-empleados-sin-actividades {
+  display: none !important;
+}

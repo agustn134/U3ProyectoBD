@@ -1,1 +1,176 @@
-<p>capacitaciones-rh works!</p>
+<div class="flex min-h-screen">
+  <app-rh-navegacion class="w-64 flex-shrink-0"></app-rh-navegacion>
+
+  <div class="flex-1 p-6 bg-slate-50">
+    <div class="max-w-6xl mx-auto">
+      <!-- Cabecera -->
+      <div class="mb-6">
+        <h1 class="text-2xl font-bold text-slate-800">Capacitaciones</h1>
+        <p class="text-sm text-slate-500">Administración de cursos y capacitaciones de empleados</p>
+      </div>
+
+      <!-- Mensajes de estado -->
+      <div *ngIf="mensaje" class="mb-4 p-4 bg-green-50 border-l-4 border-green-500 text-green-700 rounded-md flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+        <span>{{ mensaje }}</span>
+      </div>
+
+      <div *ngIf="error" class="mb-4 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 rounded-md flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+        </svg>
+        <span>{{ error }}</span>
+      </div>
+
+      <!-- Panel de filtros -->
+      <div class="bg-white rounded-lg shadow-md mb-6 overflow-hidden">
+        <div class="px-6 py-4 bg-gradient-to-r from-slate-700 to-slate-800 flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+          </svg>
+          <h2 class="text-lg font-semibold text-white">Filtros de Búsqueda</h2>
+        </div>
+
+        <div class="p-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Filtro por nombre de empleado -->
+            <div>
+              <label for="filtroNombreEmpleado" class="block text-sm font-medium text-slate-700 mb-1">Nombre del Empleado:</label>
+              <input type="text" id="filtroNombreEmpleado" [(ngModel)]="filtroNombreEmpleado"
+                class="block w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent"
+                placeholder="Buscar por nombre...">
+            </div>
+
+            <!-- Filtro por nombre de curso -->
+            <div>
+              <label for="filtroNombreCurso" class="block text-sm font-medium text-slate-700 mb-1">Nombre del Curso:</label>
+              <input type="text" id="filtroNombreCurso" [(ngModel)]="filtroNombreCurso"
+                class="block w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent"
+                placeholder="Buscar por curso...">
+            </div>
+
+            <!-- Filtro por tipo de documento -->
+            <div>
+              <label for="filtroTipoDocumento" class="block text-sm font-medium text-slate-700 mb-1">Tipo de Documento:</label>
+              <select id="filtroTipoDocumento" [(ngModel)]="filtroTipoDocumento"
+                class="block w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent">
+                <option value="">Todos</option>
+                <option value="Constancia">Constancia</option>
+                <option value="Diploma">Diploma</option>
+                <option value="Título">Título</option>
+              </select>
+            </div>
+
+            <!-- Filtro por fecha inicio -->
+            <div>
+              <label for="filtroFechaInicio" class="block text-sm font-medium text-slate-700 mb-1">Fecha Inicio (desde):</label>
+              <input type="date" id="filtroFechaInicio" [(ngModel)]="filtroFechaInicio"
+                class="block w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent">
+            </div>
+
+            <!-- Filtro por fecha fin -->
+            <div>
+              <label for="filtroFechaFin" class="block text-sm font-medium text-slate-700 mb-1">Fecha Fin (hasta):</label>
+              <input type="date" id="filtroFechaFin" [(ngModel)]="filtroFechaFin"
+                class="block w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent">
+            </div>
+          </div>
+
+          <div class="flex justify-end mt-4 space-x-3">
+            <button type="button" (click)="limpiarFiltros()"
+              class="px-4 py-2 bg-slate-200 text-slate-800 rounded-md hover:bg-slate-300 focus:outline-none focus:ring-2 focus:ring-slate-500 transition-colors">
+              Limpiar filtros
+            </button>
+            <button type="button" (click)="aplicarFiltros()"
+              class="px-4 py-2 bg-sky-600 text-white rounded-md hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500 transition-colors flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+              Buscar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lista de cursos -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="px-6 py-4 bg-gradient-to-r from-slate-700 to-slate-800 flex items-center justify-between">
+          <div class="flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13c-1.168-.776-2.754-1.253-4.5-1.253-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+            <h2 class="text-lg font-semibold text-white">Cursos Registrados</h2>
+          </div>
+          <span class="text-white text-sm">Total: {{ cursosFiltrados.length }}</span>
+        </div>
+
+        <!-- Tabla de cursos -->
+        <div *ngIf="cargando" class="flex justify-center items-center p-8">
+          <div class="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-sky-500"></div>
+          <span class="ml-3 text-sm text-slate-500">Cargando cursos...</span>
+        </div>
+
+        <div *ngIf="!cargando && cursosFiltrados.length === 0" class="p-8 text-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-slate-300 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          <p class="text-slate-500 mb-1">No se encontraron cursos</p>
+          <p class="text-sm text-slate-400">Intente con otros criterios de búsqueda o revise la conexión con el servidor</p>
+        </div>
+
+        <div *ngIf="!cargando && cursosFiltrados.length > 0" class="overflow-x-auto">
+          <table class="min-w-full divide-y divide-slate-200">
+            <thead class="bg-slate-50">
+              <tr>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Empleado</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Curso</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Fecha Inicio</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Fecha Fin</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Documento</th>
+                <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-slate-500 uppercase tracking-wider">Acciones</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-slate-200">
+              <tr *ngFor="let curso of cursosFiltrados" class="hover:bg-slate-50">
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="font-medium text-slate-900">{{ curso.nombreEmpleado }}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="text-slate-900">{{ curso.nombreCurso }}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="text-slate-500">{{ formatearFecha(curso.fechaInicio) }}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="text-slate-500">{{ formatearFecha(curso.fechaTermino) }}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full"
+                    [ngClass]="{
+                      'bg-green-100 text-green-800': curso.documentoEntregado.tipoDocumento === 'Constancia',
+                      'bg-blue-100 text-blue-800': curso.documentoEntregado.tipoDocumento === 'Diploma',
+                      'bg-purple-100 text-purple-800': curso.documentoEntregado.tipoDocumento === 'Título'
+                    }">
+                    {{ curso.documentoEntregado.tipoDocumento }}
+                  </span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                  <button (click)="eliminarCurso(curso._id)" class="text-red-600 hover:text-red-900 ml-2" title="Eliminar curso">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>

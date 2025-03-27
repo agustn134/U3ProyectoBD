@@ -1,173 +1,3 @@
-// import { Component, OnInit } from '@angular/core';
-// import { CommonModule } from '@angular/common';
-// import { FormsModule } from '@angular/forms';
-// import { EmpleadoNavegacionComponent } from "../empleado-navegacion/empleado-navegacion.component";
-
-// interface Actividad {
-//   descripcion: string;
-//   fecha: Date;
-//   estado: 'Completada' | 'En Proceso' | 'Pendiente';
-// }
-
-// @Component({
-//   selector: 'app-actividades-empleado',
-//   templateUrl: './actividades-empleado.component.html',
-//   styleUrls: ['./actividades-empleado.component.css'],
-//   // Definiendo el componente como standalone
-//   standalone: true,
-//   // Importando los módulos y componentes necesarios
-//   imports: [CommonModule, FormsModule, EmpleadoNavegacionComponent]
-// })
-// export class ActividadesEmpleadoComponent implements OnInit {
-//   actividades: Actividad[] = [];
-
-//   constructor() { }
-
-//   ngOnInit(): void {
-//     // Cargar actividades de ejemplo
-//     this.cargarActividadesEjemplo();
-//   }
-
-//   cargarActividadesEjemplo(): void {
-//     // Datos de ejemplo
-//     this.actividades = [
-//       {
-//         descripcion: 'Entrega de documentación',
-//         fecha: new Date('2025-03-10'),
-//         estado: 'Completada'
-//       },
-//       {
-//         descripcion: 'Entrevista con recursos humanos',
-//         fecha: new Date('2025-03-12'),
-//         estado: 'Completada'
-//       },
-//       {
-//         descripcion: 'Capacitación inicial',
-//         fecha: new Date('2025-03-15'),
-//         estado: 'En Proceso'
-//       },
-//       {
-//         descripcion: 'Asignación de proyecto',
-//         fecha: new Date('2025-03-20'),
-//         estado: 'Pendiente'
-//       }
-//     ];
-//   }
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import { Component, OnInit } from '@angular/core';
-// import { CommonModule } from '@angular/common';
-// import { FormsModule } from '@angular/forms';
-// import { EmpleadoNavegacionComponent } from "../empleado-navegacion/empleado-navegacion.component";
-// import { ActividadesService } from '../../services/actividades.service';
-
-// interface Actividad {
-//   _id?: string;
-//   nombreActividad: string;
-//   estatus: string;
-//   fechaInicioActividad: Date;
-//   fechaTerminoActividad: Date;
-// }
-
-// @Component({
-//   selector: 'app-actividades-empleado',
-//   templateUrl: './actividades-empleado.component.html',
-//   styleUrls: ['./actividades-empleado.component.css'],
-//   standalone: true,
-//   imports: [CommonModule, FormsModule, EmpleadoNavegacionComponent]
-// })
-// export class ActividadesEmpleadoComponent implements OnInit {
-//   actividades: any[] = [];
-//   cargando: boolean = false;
-//   error: string = '';
-
-//   constructor(private actividadesService: ActividadesService) { }
-
-//   ngOnInit(): void {
-//     this.cargarActividades();
-//   }
-
-//   cargarActividades(): void {
-//     this.cargando = true;
-//     this.actividadesService.obtenerActividades().subscribe({
-//       next: (data) => {
-//         // Transformar los datos a un formato que espera la vista
-//         this.actividades = data.map((act: any) => ({
-//           descripcion: act.nombreActividad,
-//           fecha: new Date(act.fechaInicioActividad),
-//           estado: this.mapearEstatus(act.estatus)
-//         }));
-//         this.cargando = false;
-//       },
-//       error: (error) => {
-//         console.error('Error al cargar actividades:', error);
-//         this.error = 'No se pudieron cargar las actividades';
-//         this.cargando = false;
-//         // Cargar datos de ejemplo en caso de error
-//         this.cargarActividadesEjemplo();
-//       }
-//     });
-//   }
-
-//   // Mapea los estados del backend a los estados que maneja la vista
-//   mapearEstatus(estatus: string): 'Completada' | 'En Proceso' | 'Pendiente' {
-//     const estatusMap: {[key: string]: 'Completada' | 'En Proceso' | 'Pendiente'} = {
-//       'Finalizada': 'Completada',
-//       'En Curso': 'En Proceso',
-//       'Asignada': 'Pendiente',
-//       'Cancelada': 'Pendiente'
-//     };
-//     return estatusMap[estatus] || 'Pendiente';
-//   }
-
-//   cargarActividadesEjemplo(): void {
-//     // Datos de ejemplo (fallback)
-//     this.actividades = [
-//       {
-//         descripcion: 'Entrega de documentación',
-//         fecha: new Date('2025-03-10'),
-//         estado: 'Completada'
-//       },
-//       {
-//         descripcion: 'Entrevista con recursos humanos',
-//         fecha: new Date('2025-03-12'),
-//         estado: 'Completada'
-//       },
-//       {
-//         descripcion: 'Capacitación inicial',
-//         fecha: new Date('2025-03-15'),
-//         estado: 'En Proceso'
-//       },
-//       {
-//         descripcion: 'Asignación de proyecto',
-//         fecha: new Date('2025-03-20'),
-//         estado: 'Pendiente'
-//       }
-//     ];
-//   }
-// }
-
-
-
-
-
-
-
-
-
-
 
 
 import { Component, OnInit } from '@angular/core';
@@ -175,14 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { EmpleadoNavegacionComponent } from "../empleado-navegacion/empleado-navegacion.component";
 import { ActividadesService } from '../../services/actividades.service';
-
-interface Actividad {
-  _id?: string;
-  nombreActividad: string;
-  estatus: string;
-  fechaInicioActividad: Date;
-  fechaTerminoActividad: Date;
-}
+import { EmpleadoService } from '../../services/empleado.service';
 
 @Component({
   selector: 'app-actividades-empleado',
@@ -193,54 +16,106 @@ interface Actividad {
 })
 export class ActividadesEmpleadoComponent implements OnInit {
   actividades: any[] = [];
+  actividadesFiltradas: any[] = [];
   cargando: boolean = false;
   error: string = '';
+  claveEmpleado: string = 'ALP-001'; // Clave de ejemplo para pruebas
+  nombreEmpleado: string = '';
 
-  // Propiedades para los contadores
+  // Filtros
+  filtroNombreActividad: string = '';
+  filtroEstatus: string = '';
+  filtroFechaDesde: Date | null = null;
+  filtroFechaHasta: Date | null = null;
+
+  // Contadores de actividades
   pendingCount: number = 0;
   inProgressCount: number = 0;
   completedCount: number = 0;
 
-  constructor(private actividadesService: ActividadesService) { }
+  constructor(
+    private actividadesService: ActividadesService,
+    private empleadoService: EmpleadoService
+  ) { }
 
   ngOnInit(): void {
-    this.cargarActividades();
+    this.cargarDatosEmpleado();
+  }
+
+  cargarDatosEmpleado(): void {
+    this.cargando = true;
+    this.empleadoService.obtenerEmpleado(this.claveEmpleado).subscribe({
+      next: (empleado) => {
+        this.nombreEmpleado = `${empleado.nombreCompleto.nombre} ${empleado.nombreCompleto.apellidoPaterno}`;
+        this.cargarActividades();
+      },
+      error: (error) => {
+        console.error('Error al cargar datos del empleado:', error);
+        this.error = 'No se pudieron cargar los datos del empleado';
+        this.cargando = false;
+      }
+    });
   }
 
   cargarActividades(): void {
-    this.cargando = true;
     this.actividadesService.obtenerActividades().subscribe({
       next: (data) => {
-        // Transformar los datos a un formato que espera la vista
-        this.actividades = data.map((act: any) => ({
-          descripcion: act.nombreActividad,
-          fecha: new Date(act.fechaInicioActividad),
-          estado: this.mapearEstatus(act.estatus)
-        }));
+        // Filtrar solo actividades del empleado actual (sin incluir lista de empleados sin actividades)
+        this.actividades = data
+          .filter((act: any) =>
+            act.nombreEmpleado &&
+            act.nombreEmpleado.toLowerCase().includes(this.nombreEmpleado.toLowerCase())
+          )
+          .map((act: any) => ({
+            descripcion: act.nombreActividad,
+            fechaInicio: new Date(act.fechaInicioActividad),
+            fechaTermino: new Date(act.fechaTerminoActividad),
+            estado: this.mapearEstatus(act.estatus),
+          }));
 
-        // Actualizar los contadores
+        this.aplicarFiltros();
         this.actualizarContadores();
-
         this.cargando = false;
       },
       error: (error) => {
         console.error('Error al cargar actividades:', error);
         this.error = 'No se pudieron cargar las actividades';
         this.cargando = false;
-        // Cargar datos de ejemplo en caso de error
-        this.cargarActividadesEjemplo();
       }
     });
   }
 
-  // Método para actualizar los contadores
-  actualizarContadores(): void {
-    this.pendingCount = this.actividades.filter(a => a.estado === 'Pendiente').length;
-    this.inProgressCount = this.actividades.filter(a => a.estado === 'En Proceso').length;
-    this.completedCount = this.actividades.filter(a => a.estado === 'Completada').length;
+  aplicarFiltros(): void {
+    this.actividadesFiltradas = this.actividades.filter(actividad => {
+      const nombreCoincide = !this.filtroNombreActividad ||
+        actividad.descripcion.toLowerCase().includes(this.filtroNombreActividad.toLowerCase());
+
+      const estatusCoincide = !this.filtroEstatus ||
+        actividad.estado === this.filtroEstatus;
+
+      const fechaDesdeCoincide = !this.filtroFechaDesde ||
+        actividad.fechaInicio >= this.filtroFechaDesde;
+
+      const fechaHastaCoincide = !this.filtroFechaHasta ||
+        actividad.fechaTermino <= this.filtroFechaHasta;
+
+      return nombreCoincide && estatusCoincide && fechaDesdeCoincide && fechaHastaCoincide;
+    });
+
+    // Actualizar contadores con actividades filtradas
+    this.pendingCount = this.actividadesFiltradas.filter(a => a.estado === 'Pendiente').length;
+    this.inProgressCount = this.actividadesFiltradas.filter(a => a.estado === 'En Proceso').length;
+    this.completedCount = this.actividadesFiltradas.filter(a => a.estado === 'Completada').length;
   }
 
-  // Mapea los estados del backend a los estados que maneja la vista
+  limpiarFiltros(): void {
+    this.filtroNombreActividad = '';
+    this.filtroEstatus = '';
+    this.filtroFechaDesde = null;
+    this.filtroFechaHasta = null;
+    this.aplicarFiltros();
+  }
+
   mapearEstatus(estatus: string): 'Completada' | 'En Proceso' | 'Pendiente' {
     const estatusMap: {[key: string]: 'Completada' | 'En Proceso' | 'Pendiente'} = {
       'Finalizada': 'Completada',
@@ -251,32 +126,11 @@ export class ActividadesEmpleadoComponent implements OnInit {
     return estatusMap[estatus] || 'Pendiente';
   }
 
-  cargarActividadesEjemplo(): void {
-    // Datos de ejemplo (fallback)
-    this.actividades = [
-      {
-        descripcion: 'Entrega de documentación',
-        fecha: new Date('2025-03-10'),
-        estado: 'Completada'
-      },
-      {
-        descripcion: 'Entrevista con recursos humanos',
-        fecha: new Date('2025-03-12'),
-        estado: 'Completada'
-      },
-      {
-        descripcion: 'Capacitación inicial',
-        fecha: new Date('2025-03-15'),
-        estado: 'En Proceso'
-      },
-      {
-        descripcion: 'Asignación de proyecto',
-        fecha: new Date('2025-03-20'),
-        estado: 'Pendiente'
-      }
-    ];
 
-    // Actualizar los contadores con los datos de ejemplo
-    this.actualizarContadores();
+
+  actualizarContadores(): void {
+    this.pendingCount = this.actividades.filter(a => a.estado === 'Pendiente').length;
+    this.inProgressCount = this.actividades.filter(a => a.estado === 'En Proceso').length;
+    this.completedCount = this.actividades.filter(a => a.estado === 'Completada').length;
   }
 }
