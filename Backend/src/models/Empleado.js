@@ -18,7 +18,7 @@ const empleadoSchema = new mongoose.Schema({
     numeroExterior: { type: String, required: true },
     colonia: { type: String, required: true },
     codigoPostal: { type: String, required: true },
-    ciudad: { type: String, required: true },
+    ciudad: { type: String },
   },
   departamento: { type: String, required: true },
   puesto: { type: String, required: true },

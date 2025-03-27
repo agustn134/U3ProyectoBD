@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const cursosSchema = new mongoose.Schema({
-    nombreEmpleado: { type: String, required: true },
+    nombreEmpleado: { type: String },
     nombreCurso: { type: String, required: true },
     fechaInicio: { type: Date, default: Date.now },
     fechaTermino: { type: Date, default: Date.now },

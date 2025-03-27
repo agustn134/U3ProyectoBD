@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
 import { FormsModule } from '@angular/forms'; 
 import { RhNavegacionComponent } from "../rh-navegacion/rh-navegacion.component";
 import { EmpleadoService } from '../../services/empleado.service';
+import { CiudadesService } from '../../services/ciudad.services';
 
 @Component({
   selector: 'app-registrar-empleado',
@@ -15,7 +16,7 @@ import { EmpleadoService } from '../../services/empleado.service';
   templateUrl: './registrar-empleado.component.html',
   styleUrls: ['./registrar-empleado.component.css']
 })
-export class RegistrarEmpleadoComponent {
+export class RegistrarEmpleadoComponent implements OnInit {
   // Datos básicos
   nombre: string = '';
   apellidoPaterno: string = '';
@@ -32,6 +33,9 @@ export class RegistrarEmpleadoComponent {
   colonia: string = '';
   codigoPostal: string = '';
   ciudad: string = '';
+  
+  // Lista de ciudades disponibles desde la base de datos
+  ciudadesDisponibles: any[] = [];
   
   // Datos laborales
   departamento: string = '';
@@ -50,9 +54,29 @@ export class RegistrarEmpleadoComponent {
 
   consecutivoActual: number = 1;
 
-  constructor(private empleadoService: EmpleadoService) {
+  constructor(
+    private empleadoService: EmpleadoService,
+    private ciudadService: CiudadesService
+  ) {
     // Idealmente, obtener el último consecutivo de la base de datos
     this.obtenerUltimoConsecutivo();
+  }
+
+  ngOnInit(): void {
+    // Cargar la lista de ciudades cuando se inicializa el componente
+    this.cargarCiudades();
+  }
+
+  cargarCiudades(): void {
+    this.ciudadService.verCiudades().subscribe(
+      ciudades => {
+        this.ciudadesDisponibles = ciudades;
+      },
+      error => {
+        console.error('Error al cargar las ciudades:', error);
+        this.error = 'No se pudieron cargar las ciudades. Por favor, inténtelo de nuevo más tarde.';
+      }
+    );
   }
 
   obtenerUltimoConsecutivo(): void {
@@ -168,7 +192,7 @@ export class RegistrarEmpleadoComponent {
       // Datos laborales
       departamento: this.departamento,
       puesto: this.puesto,
-      cursos: this.cursos,
+      cursos: this.cursos.filter(c => c.trim() !== ''),
       // Contacto
       telefonos: this.telefonos.filter(t => t.trim() !== ''),
       correos: this.correos.filter(c => c.trim() !== ''),
@@ -206,7 +230,6 @@ export class RegistrarEmpleadoComponent {
       this.departamento &&
       this.puesto &&
       this.telefonos.some(tel => tel.trim() !== '')
-      
     );
   }
 
@@ -243,4 +266,4 @@ export class RegistrarEmpleadoComponent {
     this.mensaje = '';
     this.error = '';
   }
-};
+}
