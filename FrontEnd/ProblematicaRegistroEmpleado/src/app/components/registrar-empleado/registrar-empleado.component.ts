@@ -113,24 +113,20 @@ export class RegistrarEmpleadoComponent implements OnInit {
       this.rfc = '';
       return;
     }
-
+  
     const inicialNombre = this.nombre.charAt(0).toUpperCase();
     const inicialApellidoPaterno = this.apellidoPaterno.charAt(0).toUpperCase();
     const inicialApellidoMaterno = this.apellidoMaterno.charAt(0).toUpperCase();
-
-    const date = new Date(this.fechaNacimiento);
-    if (isNaN(date.getTime())) {
+  
+    const [year, month, day] = this.fechaNacimiento.split('-');
+    
+    if (!year || !month || !day) {
       this.rfc = '';
       return;
     }
-
-    const year = date.getFullYear().toString().slice(-2);
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
-
-    this.rfc = `${inicialApellidoPaterno}${inicialApellidoMaterno}${inicialNombre}${year}${month}${day}`;
-
-    // Llama a la función para generar la clave del empleado
+  
+    const shortYear = year.slice(-2);
+    this.rfc = `${inicialApellidoPaterno}${inicialApellidoMaterno}${inicialNombre}${shortYear}${month}${day}`;
     this.generarClaveEmpleado();
   }
 
