@@ -20,7 +20,7 @@ export class ActualizarDatosEmpleadoComponent  {
 
   ngOnInit(): void {
     // Asigna una clave de empleado directamente para pruebas
-    this.claveEmpleado = 'E12345'; // o la clave que quieras probar
+    this.claveEmpleado = 'ALP-001'; // o la clave que quieras probar
     this.cargarDatosEmpleado();
   }
 
@@ -57,7 +57,6 @@ export class ActualizarDatosEmpleadoComponent  {
   // Datos de contacto
   telefonos: string[] = [''];
   correos: string[] = [''];
-
   // Referencias
   referencias: {
     nombre: string;
@@ -93,6 +92,7 @@ export class ActualizarDatosEmpleadoComponent  {
 
         // Datos personales editables
         this.sexo = empleado.sexo;
+        this.fotoUrl = empleado.foto || '';
 
         // Datos de domicilio
         if (empleado.domicilio) {
