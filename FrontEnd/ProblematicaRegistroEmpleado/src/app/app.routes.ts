@@ -8,6 +8,8 @@ import { RegistrarEmpleadoComponent } from './components/registrar-empleado/regi
 import { RhNavegacionComponent } from './components/rh-navegacion/rh-navegacion.component';
 import { BuscarEmpleadoComponent } from './components/buscar-empleado/buscar-empleado.component';
 import { EmpleadoNavegacionComponent } from './components/empleado-navegacion/empleado-navegacion.component';
+import { ActividadesRhComponent } from './components/actividades-rh/actividades-rh.component';
+import { CapacitacionesRhComponent } from './components/capacitaciones-rh/capacitaciones-rh.component';
 
 
 export const routes: Routes = [
@@ -19,6 +21,10 @@ export const routes: Routes = [
   { path: 'empleado/buscar-curso', component: PantallaDeCursosComponent },
   { path: 'rh/registrar-empleado', component: RegistrarEmpleadoComponent },
   { path: 'rh/buscar-empleado', component: BuscarEmpleadoComponent },
+  { path: 'rh/actividades-empleado', component: ActividadesRhComponent },
+  { path: 'rh/capacitaciones-empleado', component: CapacitacionesRhComponent },
+
+
   { path: 'rh', component: RhNavegacionComponent },
   { path: 'empleado', component: EmpleadoNavegacionComponent },
   {
