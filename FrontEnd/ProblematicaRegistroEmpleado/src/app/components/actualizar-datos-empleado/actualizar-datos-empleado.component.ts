@@ -20,7 +20,7 @@ export class ActualizarDatosEmpleadoComponent  {
 
   ngOnInit(): void {
     // Asigna una clave de empleado directamente para pruebas
-    this.claveEmpleado = 'MMC-001'; // o la clave que quieras probar
+    this.claveEmpleado = 'E12345'; // o la clave que quieras probar
     this.cargarDatosEmpleado();
   }
 
